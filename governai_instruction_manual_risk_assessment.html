@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovernAI — How to Perform a Risk Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --charcoal:#141413;--orange:#D97757;--orange-dk:#C15F3C;
+  --cream:#FAF9F5;--white:#fff;--gray:#7A7870;
+  --gray-line:#E8E6DC;--gray-bg:#F5F4EF;
+  --blue:#6A9BCC;--green:#788C5D;--red:#C0634A;
+}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--white);color:var(--charcoal);line-height:1.65;font-size:15px;}
+.topbar{background:var(--charcoal);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;position:sticky;top:0;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.logo-sq{width:26px;height:26px;background:var(--orange);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.logo-sq svg{width:13px;height:13px;}
+.logo-name{font-family:"DM Serif Display",serif;font-size:16px;color:var(--cream);}
+.logo-name span{color:var(--orange);}
+.topbar-right{display:flex;gap:10px;align-items:center;}
+.back-link{font-size:12px;color:rgba(250,249,245,.4);text-decoration:none;padding:5px 12px;border:1px solid rgba(255,255,255,.1);border-radius:7px;}
+.back-link:hover{color:var(--cream);}
+.print-btn{font-size:11px;font-weight:600;color:var(--cream);background:var(--orange);border:none;border-radius:7px;padding:6px 14px;cursor:pointer;font-family:"DM Sans",sans-serif;}
+.print-btn:hover{background:var(--orange-dk);}
+.page{max-width:820px;margin:0 auto;padding:56px 40px 100px;}
+.cover{margin-bottom:52px;padding-bottom:40px;border-bottom:2px solid var(--charcoal);}
+.cover-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.cover-label::before{content:"";width:16px;height:2px;background:var(--orange);display:block;}
+.cover h1{font-family:"DM Serif Display",serif;font-size:44px;line-height:1.08;color:var(--charcoal);margin-bottom:12px;}
+.cover-intro{font-size:15px;color:var(--gray);line-height:1.7;max-width:580px;margin-bottom:28px;}
+.cover-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:12px;color:var(--gray);padding:4px 12px;border-radius:20px;border:1px solid var(--gray-line);background:var(--gray-bg);}
+.toc{margin-bottom:56px;}
+.toc-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+.toc-list{list-style:none;}
+.toc-item a{display:flex;align-items:baseline;gap:10px;padding:8px 0;text-decoration:none;color:var(--charcoal);font-size:14px;border-bottom:1px solid var(--gray-line);transition:color .12s;}
+.toc-item:last-child a{border-bottom:none;}
+.toc-item a:hover{color:var(--orange);}
+.toc-n{font-family:"DM Mono",monospace;font-size:10px;color:var(--gray);width:24px;flex-shrink:0;}
+.toc-dot{flex:1;border-bottom:1px dotted var(--gray-line);margin:0 6px;align-self:flex-end;padding-bottom:3px;}
+.section{margin-bottom:60px;padding-top:8px;}
+.section-divider{height:1px;background:var(--gray-line);margin:52px 0;}
+.step-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+h2.step-title{font-family:"DM Serif Display",serif;font-size:28px;color:var(--charcoal);margin-bottom:10px;line-height:1.15;}
+.step-intro{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:28px;}
+.screen-fig{border:1px solid var(--gray-line);border-radius:10px;overflow:hidden;margin:24px 0;}
+.screen-fig svg{display:block;width:100%;}
+figcaption{font-size:11px;font-family:"DM Mono",monospace;color:var(--gray);padding:9px 16px;background:var(--gray-bg);border-top:1px solid var(--gray-line);display:flex;align-items:center;gap:6px;}
+figcaption::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.field-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13.5px;}
+.field-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);padding:8px 14px;border-bottom:2px solid var(--charcoal);background:var(--gray-bg);}
+.field-table td{padding:11px 14px;border-bottom:1px solid var(--gray-line);vertical-align:top;line-height:1.55;}
+.field-table tr:last-child td{border-bottom:none;}
+.fname{font-weight:700;}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.t-high{background:rgba(192,99,74,.1);color:var(--red);}
+.t-med{background:rgba(217,119,87,.12);color:var(--orange-dk);}
+.t-low{background:rgba(120,140,93,.12);color:var(--green);}
+.callout{border-radius:8px;padding:14px 18px;margin:20px 0;display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;}
+.ci{font-size:16px;flex-shrink:0;margin-top:1px;}
+.callout.warn{background:rgba(192,99,74,.07);border:1px solid rgba(192,99,74,.2);}
+.callout.info{background:rgba(120,140,93,.07);border:1px solid rgba(120,140,93,.2);}
+.callout strong{font-weight:700;}
+.next-steps{list-style:none;display:flex;flex-direction:column;gap:12px;margin:20px 0;}
+.ns-item{display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.55;}
+.ns-num{width:26px;height:26px;border-radius:50%;background:var(--charcoal);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.effects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0;}
+.effect{background:var(--gray-bg);border:1px solid var(--gray-line);border-radius:10px;padding:18px 16px;}
+.effect-icon{font-size:20px;margin-bottom:8px;}
+.effect-title{font-size:12px;font-weight:700;color:var(--charcoal);margin-bottom:5px;}
+.effect-desc{font-size:12px;color:var(--gray);line-height:1.5;}
+.footer{border-top:1px solid var(--gray-line);padding-top:32px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-text{font-size:12px;color:var(--gray);}
+.footer-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:var(--charcoal);color:var(--cream);border-radius:9px;text-decoration:none;font-size:13px;font-weight:600;}
+.footer-btn:hover{background:var(--orange);}
+@media print{.topbar,.print-btn{display:none;}.page{padding:0;max-width:100%;}.section{page-break-inside:avoid;}}
+@media(max-width:640px){.page{padding:28px 20px 60px;}.cover h1{font-size:32px;}.topbar{padding:0 20px;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="logo-sq"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7l-8-4z" fill="white" opacity=".9"/><path d="M9 12l2 2 4-4" stroke="#D97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span class="logo-name">Govern<span>AI</span></span>
+  </a>
+  <div class="topbar-right">
+    <a href="index.html" class="back-link">← Back to GovernAI</a>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">Instruction Manual · Risk Assessment Engine</div>
+    <h1>How to Perform<br>a Risk Assessment</h1>
+    <p class="cover-intro">The Risk Assessment Engine converts a registered AI system from Provisional into a formally scored record. It produces an overall risk score, a risk tier, and automatically generates governance findings that flow directly to Risk Management.</p>
+    <div class="cover-chips">
+      <span class="chip">⚖️ 4-step wizard</span>
+      <span class="chip">4 context questions</span>
+      <span class="chip">6 scoring dimensions</span>
+      <span class="chip">🛡 NIST AI RMF · MAP 2 · MEASURE</span>
+      <span class="chip">⏱ ~12 minutes</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-label">Steps</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#s1"><span class="toc-n">01</span>Open the Risk Assessment module<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s2"><span class="toc-n">02</span>Start a new assessment &amp; select a system<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s3"><span class="toc-n">03</span>Answer the four context questions<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s4"><span class="toc-n">04</span>Score the six risk dimensions<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s5"><span class="toc-n">05</span>Review results &amp; save<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s6"><span class="toc-n">06</span>What happens automatically<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s7"><span class="toc-n">07</span>Next steps<span class="toc-dot"></span></a></li>
+    </ul>
+  </div>
+
+
+  <!-- ── STEP 1 ── -->
+  <div class="section" id="s1">
+    <div class="step-label">Step 01</div>
+    <h2 class="step-title">Open the Risk Assessment module</h2>
+    <p class="step-intro">Click <strong>Risk Assessment</strong> in the left sidebar. The module lists every registered AI system and its current assessment status. A system registered but not yet assessed shows as <strong>Provisional</strong>.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 210" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="210" fill="#FAF9F5"/>
+        <!-- Sidebar -->
+        <rect width="196" height="210" fill="#141413"/>
+        <rect x="10" y="12" width="22" height="22" rx="6" fill="#D97757"/>
+        <text x="21" y="27" fill="white" font-size="10" font-weight="700" text-anchor="middle">G</text>
+        <text x="38" y="27" fill="#FAF9F5" font-size="12" font-family="DM Serif Display, serif">GovernAI</text>
+        <text x="12" y="54" fill="#7A7870" font-size="8" font-weight="700" letter-spacing="1.2">OVERVIEW</text>
+        <text x="28" y="70" fill="#7A7870" font-size="11">GRC Dashboard</text>
+        <text x="12" y="94" fill="#7A7870" font-size="8" font-weight="700" letter-spacing="1.2">MODULES</text>
+        <text x="28" y="110" fill="#7A7870" font-size="11">Governance Playbook</text>
+        <text x="28" y="130" fill="#7A7870" font-size="11">AI Inventory</text>
+        <rect x="6" y="136" width="184" height="26" rx="7" fill="rgba(217,119,87,0.15)"/>
+        <text x="28" y="153" fill="#D97757" font-size="11" font-weight="600">Risk Assessment</text>
+        <text x="28" y="175" fill="#7A7870" font-size="11">Vendor Due Diligence</text>
+        <text x="28" y="195" fill="#7A7870" font-size="11">Risk Management</text>
+        <!-- Main -->
+        <rect x="196" y="0" width="624" height="38" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="23" fill="#141413" font-size="13" font-weight="600">Risk Assessment Engine</text>
+        <!-- Controls -->
+        <rect x="196" y="38" width="624" height="34" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="208" y="46" width="36" height="20" rx="10" fill="#141413"/>
+        <text x="226" y="59" fill="white" font-size="10" font-weight="600" text-anchor="middle">All</text>
+        <rect x="250" y="46" width="58" height="20" rx="10" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="279" y="59" fill="#7A7870" font-size="10" text-anchor="middle">Pending</text>
+        <rect x="314" y="46" width="66" height="20" rx="10" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="347" y="59" fill="#7A7870" font-size="10" text-anchor="middle">Complete</text>
+        <rect x="386" y="46" width="62" height="20" rx="10" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="417" y="59" fill="#7A7870" font-size="10" text-anchor="middle">High Risk</text>
+        <rect x="632" y="44" width="172" height="24" rx="7" fill="#D97757"/>
+        <text x="718" y="59" fill="white" font-size="11" font-weight="700" text-anchor="middle">+ New assessment</text>
+        <!-- List rows -->
+        <rect x="196" y="72" width="624" height="26" fill="white"/>
+        <rect x="196" y="72" width="3" height="26" fill="#C0634A"/>
+        <text x="210" y="88" fill="#7A7870" font-size="9" font-family="DM Mono,monospace">SYS-001</text>
+        <text x="268" y="88" fill="#141413" font-size="11">Credit Underwriting AI</text>
+        <text x="490" y="88" fill="#7A7870" font-size="10">Zest AI · Credit Risk</text>
+        <rect x="648" y="78" width="60" height="14" rx="5" fill="rgba(192,99,74,0.1)"/>
+        <text x="678" y="88" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Provisional</text>
+        <line x1="196" y1="98" x2="820" y2="98" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="196" y="98" width="3" height="26" fill="#6A9BCC"/>
+        <text x="210" y="114" fill="#7A7870" font-size="9" font-family="DM Mono,monospace">SYS-002</text>
+        <text x="268" y="114" fill="#141413" font-size="11">Clinical Decision Support</text>
+        <text x="490" y="114" fill="#7A7870" font-size="10">Nuance · Clinical Ops</text>
+        <rect x="648" y="104" width="60" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="678" y="114" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Provisional</text>
+        <line x1="196" y1="124" x2="820" y2="124" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Newly registered system highlighted -->
+        <rect x="196" y="124" width="624" height="30" fill="rgba(120,140,93,0.06)" stroke="#788C5D" stroke-width="1"/>
+        <rect x="196" y="124" width="3" height="30" fill="#788C5D"/>
+        <text x="210" y="142" fill="#7A7870" font-size="9" font-family="DM Mono,monospace">SYS-007</text>
+        <text x="268" y="142" fill="#141413" font-size="11" font-weight="700">Customer Churn Predictor</text>
+        <text x="490" y="142" fill="#7A7870" font-size="10">Internal · Compliance</text>
+        <rect x="648" y="130" width="60" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="678" y="140" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Provisional</text>
+        <rect x="716" y="130" width="34" height="14" rx="5" fill="#788C5D"/>
+        <text x="733" y="140" fill="white" font-size="9" font-weight="700" text-anchor="middle">NEW</text>
+        <line x1="196" y1="154" x2="820" y2="154" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="196" y="154" width="3" height="26" fill="#D97757"/>
+        <text x="210" y="170" fill="#7A7870" font-size="9" font-family="DM Mono,monospace">SYS-003</text>
+        <text x="268" y="170" fill="#141413" font-size="11">Fraud Detection AI</text>
+        <text x="490" y="170" fill="#7A7870" font-size="10">Fraud Operations</text>
+        <rect x="648" y="160" width="60" height="14" rx="5" fill="rgba(192,99,74,0.1)"/>
+        <text x="678" y="170" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Provisional</text>
+        <line x1="196" y1="180" x2="820" y2="180" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="268" y="197" fill="#141413" font-size="11">HR Screening Assistant</text>
+      </svg>
+      <figcaption>Risk Assessment Engine — newly registered systems appear as "Provisional" until formally assessed</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 2 ── -->
+  <div class="section" id="s2">
+    <div class="step-label">Step 02</div>
+    <h2 class="step-title">Start a new assessment &amp; select a system</h2>
+    <p class="step-intro">Click <strong>+ New assessment</strong>. The 4-step wizard opens on Step 1. Click the system you want to assess — it highlights with an orange border. Then click <strong>Next</strong>.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs>
+          <filter id="sh"><feDropShadow dx="0" dy="6" stdDeviation="18" flood-color="rgba(0,0,0,0.22)"/></filter>
+          <marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker>
+        </defs>
+        <rect width="820" height="300" fill="rgba(20,20,19,0.45)"/>
+        <rect x="70" y="16" width="680" height="268" rx="13" fill="white" filter="url(#sh)"/>
+        <!-- Header -->
+        <rect x="70" y="16" width="680" height="50" rx="13" fill="#141413"/>
+        <rect x="70" y="42" width="680" height="24" fill="#141413"/>
+        <text x="94" y="37" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 1 OF 4</text>
+        <text x="94" y="52" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Select system</text>
+        <circle cx="724" cy="35" r="10" fill="rgba(255,255,255,0.08)"/>
+        <text x="724" y="40" fill="rgba(255,255,255,0.4)" font-size="12" text-anchor="middle">✕</text>
+        <!-- Step tabs -->
+        <rect x="70" y="66" width="680" height="28" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="70" y="66" width="170" height="28" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="70" y="91" width="170" height="3" fill="#D97757"/>
+        <text x="155" y="84" fill="#D97757" font-size="11" font-weight="600" text-anchor="middle">Select system</text>
+        <text x="325" y="84" fill="#B0AEA5" font-size="11" text-anchor="middle">Context</text>
+        <text x="495" y="84" fill="#B0AEA5" font-size="11" text-anchor="middle">Score dimensions</text>
+        <text x="665" y="84" fill="#B0AEA5" font-size="11" text-anchor="middle">Results</text>
+        <!-- Instruction -->
+        <text x="94" y="114" fill="#7A7870" font-size="11.5">Select an AI system from the inventory to begin the structured assessment.</text>
+        <!-- System cards -->
+        <rect x="90" y="124" width="640" height="36" rx="7" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="90" y="124" width="4" height="36" rx="2" fill="#C0634A"/>
+        <text x="108" y="140" fill="#141413" font-size="12" font-weight="600">Credit Underwriting AI</text>
+        <text x="108" y="153" fill="#7A7870" font-size="10">Zest AI · Credit Risk</text>
+        <rect x="672" y="133" width="48" height="14" rx="5" fill="rgba(192,99,74,0.1)"/>
+        <text x="696" y="143" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">High</text>
+
+        <rect x="90" y="166" width="640" height="36" rx="7" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="90" y="166" width="4" height="36" rx="2" fill="#6A9BCC"/>
+        <text x="108" y="182" fill="#141413" font-size="12" font-weight="600">Clinical Decision Support</text>
+        <text x="108" y="195" fill="#7A7870" font-size="10">Nuance DAX · Clinical Operations</text>
+        <rect x="672" y="175" width="48" height="14" rx="5" fill="rgba(192,99,74,0.1)"/>
+        <text x="696" y="185" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">High</text>
+
+        <!-- Customer Churn SELECTED -->
+        <rect x="90" y="208" width="640" height="36" rx="7" fill="rgba(217,119,87,0.08)" stroke="#D97757" stroke-width="2"/>
+        <rect x="90" y="208" width="4" height="36" rx="2" fill="#788C5D"/>
+        <text x="108" y="224" fill="#141413" font-size="12" font-weight="700">Customer Churn Predictor</text>
+        <text x="108" y="237" fill="#7A7870" font-size="10">Internal · Compliance</text>
+        <rect x="672" y="217" width="52" height="14" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="698" y="227" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">Medium</text>
+        <circle cx="740" cy="226" r="9" fill="#D97757"/>
+        <path d="M736 226 l3.5 3.5 5.5-5.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <!-- Annotation -->
+        <path d="M749 226 L776 226" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a1)"/>
+        <rect x="778" y="214" width="110" height="24" rx="5" fill="#D97757"/>
+        <text x="833" y="229" fill="white" font-size="10.5" font-weight="700" text-anchor="middle">Click to select</text>
+        <!-- Footer -->
+        <rect x="70" y="262" width="680" height="22" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="664" y="264" width="78" height="16" rx="5" fill="#D97757"/>
+        <text x="703" y="275" fill="white" font-size="11" font-weight="700" text-anchor="middle">Next →</text>
+        <rect x="76" y="264" width="56" height="16" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="104" y="275" fill="#7A7870" font-size="10" text-anchor="middle">Cancel</text>
+      </svg>
+      <figcaption>Wizard Step 1 — click the system to select it (orange border confirms selection), then click Next</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 3 ── -->
+  <div class="section" id="s3">
+    <div class="step-label">Step 03</div>
+    <h2 class="step-title">Answer the four context questions</h2>
+    <p class="step-intro">Step 2 shows four questions about how this system is used. Your answers shape how the scoring engine weights each dimension. Select one option per question — all four must be answered before you can continue.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 370" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="370" fill="rgba(20,20,19,0.45)"/>
+        <rect x="70" y="12" width="680" height="346" rx="13" fill="white" filter="url(#sh)"/>
+        <rect x="70" y="12" width="680" height="50" rx="13" fill="#141413"/>
+        <rect x="70" y="38" width="680" height="24" fill="#141413"/>
+        <text x="94" y="33" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 2 OF 4</text>
+        <text x="94" y="50" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Context — Customer Churn Predictor</text>
+        <!-- Tabs -->
+        <rect x="70" y="62" width="680" height="26" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="240" y="62" width="170" height="26" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="240" y="85" width="170" height="3" fill="#D97757"/>
+        <text x="155" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Select system</text>
+        <text x="325" y="78" fill="#D97757" font-size="10" font-weight="600" text-anchor="middle">Context</text>
+        <text x="495" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">Score dimensions</text>
+        <text x="665" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">Results</text>
+        <text x="94" y="106" fill="#7A7870" font-size="11">These context questions shape how the scoring engine weights each risk dimension.</text>
+        <!-- Q1 -->
+        <text x="94" y="126" fill="#141413" font-size="12" font-weight="700">1.  What is the primary purpose of this AI system?</text>
+        <text x="94" y="140" fill="#7A7870" font-size="10.5">Select the option that best describes how this system is used.</text>
+        <rect x="94" y="148" width="632" height="22" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <circle cx="108" cy="159" r="6" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="120" y="163" fill="#141413" font-size="11">Makes or informs decisions directly affecting individuals (credit, clinical, hiring, insurance)</text>
+        <rect x="94" y="174" width="632" height="22" rx="6" fill="rgba(217,119,87,0.08)" stroke="#D97757" stroke-width="1.5"/>
+        <circle cx="108" cy="185" r="6" fill="#D97757" stroke="#D97757" stroke-width="1.5"/>
+        <circle cx="108" cy="185" r="2.5" fill="white"/>
+        <text x="120" y="189" fill="#141413" font-size="11" font-weight="600">Supports operational processes with moderate downstream impact</text>
+        <rect x="94" y="200" width="632" height="22" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <circle cx="108" cy="211" r="6" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="120" y="215" fill="#141413" font-size="11">Productivity or internal tool — no direct effect on individuals</text>
+        <!-- Q2 -->
+        <text x="94" y="240" fill="#141413" font-size="12" font-weight="700">2.  Who is affected by this system's outputs?</text>
+        <text x="94" y="254" fill="#7A7870" font-size="10.5">Consider the broadest realistic scope of impact.</text>
+        <rect x="94" y="262" width="632" height="22" rx="6" fill="rgba(217,119,87,0.08)" stroke="#D97757" stroke-width="1.5"/>
+        <circle cx="108" cy="273" r="6" fill="#D97757" stroke="#D97757" stroke-width="1.5"/>
+        <circle cx="108" cy="273" r="2.5" fill="white"/>
+        <text x="120" y="277" fill="#141413" font-size="11" font-weight="600">External individuals (customers, patients, job applicants, borrowers)</text>
+        <rect x="94" y="288" width="632" height="22" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <circle cx="108" cy="299" r="6" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="120" y="303" fill="#141413" font-size="11">Mix of internal staff and external parties</text>
+        <rect x="94" y="314" width="632" height="22" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <circle cx="108" cy="325" r="6" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="120" y="329" fill="#141413" font-size="11">Internal staff only</text>
+        <!-- Footer -->
+        <rect x="70" y="346" width="680" height="12" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="94" y="355" fill="#7A7870" font-size="9.5">Answer all 4 questions to continue  ·  2 of 4 answered</text>
+        <rect x="664" y="347" width="78" height="10" rx="4" fill="#E8E6DC"/>
+        <text x="703" y="355" fill="#B0AEA5" font-size="9" font-weight="700" text-anchor="middle">Next →</text>
+      </svg>
+      <figcaption>Wizard Step 2 — select one option per question (orange = selected). Next enables only after all 4 are answered.</figcaption>
+    </figure>
+
+    <table class="field-table">
+      <thead><tr><th>Question</th><th>How to answer</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="fname">1. Primary purpose</span></td>
+          <td>Select how the system's output is actually used day-to-day — not how it was designed. If a human uses it to inform a decision, that is "supports operational processes." If it drives an automated outcome, select the first option.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">2. Who is affected</span></td>
+          <td>Think broadly. If even some of the affected parties are external individuals — customers, applicants, patients — select that option. Do not under-scope.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">3. Consequence of error</span></td>
+          <td>Consider the worst realistic scenario if this system produces a wrong output. Think about regulatory exposure, financial impact on individuals, and safety implications.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">4. Formal validation</span></td>
+          <td>Answer based on what has actually been completed, not what is planned. If bias testing is scheduled but not done, select "No formal validation."</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <div class="ci">⚠️</div>
+      <div><strong>Answer for today, not your plans.</strong> The assessment measures your actual current exposure — which is what regulators will inspect. Score what is true now.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 4 ── -->
+  <div class="section" id="s4">
+    <div class="step-label">Step 04</div>
+    <h2 class="step-title">Score the six risk dimensions</h2>
+    <p class="step-intro">Step 3 shows six risk dimensions, each with a slider from <strong>1 (low risk)</strong> to <strong>10 (high risk)</strong>. Drag each slider to reflect where this system sits today. The final score is a weighted average across all six.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="420" fill="rgba(20,20,19,0.45)"/>
+        <rect x="50" y="10" width="720" height="400" rx="13" fill="white" filter="url(#sh)"/>
+        <rect x="50" y="10" width="720" height="50" rx="13" fill="#141413"/>
+        <rect x="50" y="36" width="720" height="24" fill="#141413"/>
+        <text x="74" y="32" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 3 OF 4</text>
+        <text x="74" y="50" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Score dimensions — Customer Churn Predictor</text>
+        <!-- Tabs -->
+        <rect x="50" y="60" width="720" height="24" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="230" y="60" width="180" height="24" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="230" y="81" width="180" height="3" fill="#D97757"/>
+        <text x="140" y="76" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Select system</text>
+        <text x="320" y="76" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Context</text>
+        <text x="500" y="76" fill="#D97757" font-size="10" font-weight="600" text-anchor="middle">Score dimensions</text>
+        <text x="680" y="76" fill="#B0AEA5" font-size="10" text-anchor="middle">Results</text>
+        <text x="74" y="102" fill="#7A7870" font-size="11">Score each dimension from 1 (low risk) to 10 (high risk) based on the system's current state.</text>
+
+        <!-- Helper function: draw a dimension row -->
+        <!-- Dim 1: Decision impact 22% score=5 orange -->
+        <rect x="70" y="112" width="680" height="44" rx="6" fill="#F5F4EF"/>
+        <text x="82" y="128" fill="#141413" font-size="12" font-weight="700">Decision impact</text>
+        <text x="198" y="128" fill="#7A7870" font-size="10">(weight: 22%)</text>
+        <text x="82" y="142" fill="#7A7870" font-size="10.5">How consequential are decisions made using this AI output?</text>
+        <text x="82" y="149" fill="#B0AEA5" font-size="9">1 = Informational only  ·  10 = Directly determines outcomes for individuals</text>
+        <rect x="82" y="148" width="600" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="82" y="148" width="300" height="4" rx="2" fill="#D97757"/>
+        <circle cx="382" cy="150" r="7" fill="white" stroke="#D97757" stroke-width="2"/>
+        <text x="700" y="154" fill="#D97757" font-size="14" font-weight="700" text-anchor="middle">5</text>
+
+        <!-- Dim 2: Data sensitivity 20% score=4 orange -->
+        <rect x="70" y="160" width="680" height="44" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="82" y="176" fill="#141413" font-size="12" font-weight="700">Data sensitivity</text>
+        <text x="186" y="176" fill="#7A7870" font-size="10">(weight: 20%)</text>
+        <text x="82" y="190" fill="#7A7870" font-size="10.5">What categories of personal or regulated data does this system process?</text>
+        <text x="82" y="197" fill="#B0AEA5" font-size="9">1 = No personal data  ·  10 = PHI, financial, biometrics or regulated data</text>
+        <rect x="82" y="196" width="600" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="82" y="196" width="234" height="4" rx="2" fill="#D97757"/>
+        <circle cx="316" cy="198" r="7" fill="white" stroke="#D97757" stroke-width="2"/>
+        <text x="700" y="202" fill="#D97757" font-size="14" font-weight="700" text-anchor="middle">4</text>
+
+        <!-- Dim 3: Regulatory exposure 20% score=3 green -->
+        <rect x="70" y="208" width="680" height="44" rx="6" fill="#F5F4EF"/>
+        <text x="82" y="224" fill="#141413" font-size="12" font-weight="700">Regulatory exposure</text>
+        <text x="210" y="224" fill="#7A7870" font-size="10">(weight: 20%)</text>
+        <text x="82" y="238" fill="#7A7870" font-size="10.5">How directly does this system fall under AI-specific regulatory obligations?</text>
+        <text x="82" y="245" fill="#B0AEA5" font-size="9">1 = No known obligations  ·  10 = SR 11-7, HIPAA, FDA SaMD, ECOA, or EU AI Act</text>
+        <rect x="82" y="244" width="600" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="82" y="244" width="156" height="4" rx="2" fill="#788C5D"/>
+        <circle cx="238" cy="246" r="7" fill="white" stroke="#788C5D" stroke-width="2"/>
+        <text x="700" y="250" fill="#788C5D" font-size="14" font-weight="700" text-anchor="middle">3</text>
+
+        <!-- Dim 4: Human oversight 15% score=3 green -->
+        <rect x="70" y="256" width="680" height="44" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="82" y="272" fill="#141413" font-size="12" font-weight="700">Human oversight</text>
+        <text x="190" y="272" fill="#7A7870" font-size="10">(weight: 15%)</text>
+        <text x="82" y="286" fill="#7A7870" font-size="10.5">What level of human review exists before AI output drives action?</text>
+        <text x="82" y="293" fill="#B0AEA5" font-size="9">1 = Meaningful human review of all outputs  ·  10 = Fully automated, no human checkpoint</text>
+        <rect x="82" y="292" width="600" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="82" y="292" width="156" height="4" rx="2" fill="#788C5D"/>
+        <circle cx="238" cy="294" r="7" fill="white" stroke="#788C5D" stroke-width="2"/>
+        <text x="700" y="298" fill="#788C5D" font-size="14" font-weight="700" text-anchor="middle">3</text>
+
+        <!-- Dim 5: Third-party dependency 13% score=6 orange -->
+        <rect x="70" y="304" width="680" height="44" rx="6" fill="#F5F4EF"/>
+        <text x="82" y="320" fill="#141413" font-size="12" font-weight="700">Third-party dependency</text>
+        <text x="230" y="320" fill="#7A7870" font-size="10">(weight: 13%)</text>
+        <text x="82" y="334" fill="#7A7870" font-size="10.5">How much visibility and control do you have over the vendor AI model?</text>
+        <text x="82" y="341" fill="#B0AEA5" font-size="9">1 = Fully audited, SOC 2 + bias reports  ·  10 = Black-box, minimal transparency</text>
+        <rect x="82" y="340" width="600" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="82" y="340" width="354" height="4" rx="2" fill="#D97757"/>
+        <circle cx="436" cy="342" r="7" fill="white" stroke="#D97757" stroke-width="2"/>
+        <text x="700" y="346" fill="#D97757" font-size="14" font-weight="700" text-anchor="middle">6</text>
+
+        <!-- Dim 6: Model transparency 10% score=4 orange -->
+        <rect x="70" y="352" width="680" height="44" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="82" y="368" fill="#141413" font-size="12" font-weight="700">Model transparency</text>
+        <text x="202" y="368" fill="#7A7870" font-size="10">(weight: 10%)</text>
+        <text x="82" y="382" fill="#7A7870" font-size="10.5">How explainable are this model's decisions?</text>
+        <text x="82" y="389" fill="#B0AEA5" font-size="9">1 = Full explainability, audit trail  ·  10 = Outputs unexplainable, no audit trail</text>
+        <rect x="82" y="388" width="600" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="82" y="388" width="234" height="4" rx="2" fill="#D97757"/>
+        <circle cx="316" cy="390" r="7" fill="white" stroke="#D97757" stroke-width="2"/>
+        <text x="700" y="394" fill="#D97757" font-size="14" font-weight="700" text-anchor="middle">4</text>
+      </svg>
+      <figcaption>Wizard Step 3 — drag each slider. Green = low risk, orange = medium, red = high. Scores update the result live.</figcaption>
+    </figure>
+
+    <table class="field-table">
+      <thead><tr><th>Dimension</th><th>Weight</th><th>Score high (7–10) when…</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="fname">Decision impact</span></td>
+          <td><span class="tag t-high">22%</span></td>
+          <td>The system directly determines consequential outcomes for individuals — loan approvals, clinical decisions, hiring</td>
+        </tr>
+        <tr>
+          <td><span class="fname">Data sensitivity</span></td>
+          <td><span class="tag t-high">20%</span></td>
+          <td>The system processes PHI, financial data, biometrics, or other regulated personal data categories</td>
+        </tr>
+        <tr>
+          <td><span class="fname">Regulatory exposure</span></td>
+          <td><span class="tag t-high">20%</span></td>
+          <td>The system is directly subject to SR 11-7, HIPAA, FDA SaMD, ECOA, or EU AI Act obligations</td>
+        </tr>
+        <tr>
+          <td><span class="fname">Human oversight</span></td>
+          <td><span class="tag t-med">15%</span></td>
+          <td>The system is fully automated — outputs drive action with no human review before decisions are made</td>
+        </tr>
+        <tr>
+          <td><span class="fname">Third-party dependency</span></td>
+          <td><span class="tag t-med">13%</span></td>
+          <td>The vendor provides a black-box model with minimal documentation and no audit rights</td>
+        </tr>
+        <tr>
+          <td><span class="fname">Model transparency</span></td>
+          <td><span class="tag t-low">10%</span></td>
+          <td>Outputs cannot be explained — no feature importance, no audit trail, no way to reconstruct a decision</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <div class="ci">⚠️</div>
+      <div><strong>Score what is true today, not what you plan to improve.</strong> If you intend to add human oversight next quarter but it is not in place yet, score Human oversight as high today. The assessment records your actual exposure.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 5 ── -->
+  <div class="section" id="s5">
+    <div class="step-label">Step 05</div>
+    <h2 class="step-title">Review results &amp; save</h2>
+    <p class="step-intro">Step 4 shows your overall score, risk tier, and the governance findings automatically generated from your dimension scores. Review everything carefully, then click <strong>Save assessment</strong>.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 310" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs>
+          <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker>
+        </defs>
+        <rect width="820" height="310" fill="rgba(20,20,19,0.45)"/>
+        <rect x="70" y="12" width="680" height="286" rx="13" fill="white" filter="url(#sh)"/>
+        <rect x="70" y="12" width="680" height="50" rx="13" fill="#141413"/>
+        <rect x="70" y="38" width="680" height="24" fill="#141413"/>
+        <text x="94" y="33" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 4 OF 4</text>
+        <text x="94" y="50" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Results — Customer Churn Predictor</text>
+        <!-- Tabs all complete -->
+        <rect x="70" y="62" width="680" height="24" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="580" y="62" width="170" height="24" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="580" y="83" width="170" height="3" fill="#D97757"/>
+        <text x="155" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Select system</text>
+        <text x="325" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Context</text>
+        <text x="495" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Score dimensions</text>
+        <text x="665" y="78" fill="#D97757" font-size="10" font-weight="600" text-anchor="middle">Results</text>
+        <!-- Score ring -->
+        <circle cx="152" cy="152" r="48" fill="none" stroke="#E8E6DC" stroke-width="9"/>
+        <circle cx="152" cy="152" r="48" fill="none" stroke="#D97757" stroke-width="9"
+          stroke-dasharray="301.6" stroke-dashoffset="181.0"
+          stroke-linecap="round" transform="rotate(-90 152 152)"/>
+        <text x="152" y="148" fill="#D97757" font-size="24" font-weight="700" text-anchor="middle">4</text>
+        <text x="152" y="166" fill="#7A7870" font-size="11" text-anchor="middle">/ 10</text>
+        <!-- Tier + name -->
+        <text x="226" y="118" fill="#D97757" font-size="20" font-weight="700" font-family="DM Serif Display, serif">Medium Risk</text>
+        <text x="226" y="136" fill="#7A7870" font-size="12">Customer Churn Predictor</text>
+        <text x="226" y="152" fill="#7A7870" font-size="11">Weighted score: 4.2 / 10 across 6 dimensions</text>
+        <!-- Tier bands -->
+        <rect x="226" y="162" width="66" height="16" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="259" y="173" fill="#788C5D" font-size="9.5" font-weight="700" text-anchor="middle">Low  1–3</text>
+        <rect x="298" y="162" width="76" height="16" rx="5" fill="rgba(217,119,87,0.18)"/>
+        <text x="336" y="173" fill="#D97757" font-size="9.5" font-weight="700" text-anchor="middle">Medium  4–6</text>
+        <rect x="380" y="162" width="68" height="16" rx="5" fill="rgba(192,99,74,0.12)"/>
+        <text x="414" y="173" fill="#C0634A" font-size="9.5" font-weight="700" text-anchor="middle">High  7–10</text>
+        <!-- Annotation -->
+        <path d="M484 152 L530 152" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a2)"/>
+        <rect x="532" y="138" width="200" height="28" rx="5" fill="rgba(217,119,87,0.09)" stroke="rgba(217,119,87,0.3)" stroke-width="1"/>
+        <text x="632" y="151" fill="#D97757" font-size="10.5" font-weight="700" text-anchor="middle">Returns to Step 3 to adjust</text>
+        <text x="632" y="163" fill="#D97757" font-size="10.5" font-weight="700" text-anchor="middle">sliders before saving</text>
+        <!-- Findings -->
+        <text x="94" y="204" fill="#141413" font-size="12" font-weight="700">2 findings identified</text>
+        <rect x="94" y="212" width="632" height="30" rx="6" fill="rgba(217,119,87,0.06)" stroke="rgba(217,119,87,0.2)" stroke-width="1"/>
+        <rect x="94" y="212" width="3" height="30" rx="1" fill="#D97757"/>
+        <rect x="102" y="217" width="34" height="14" rx="4" fill="rgba(217,119,87,0.15)"/>
+        <text x="119" y="227" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">High</text>
+        <text x="142" y="227" fill="#141413" font-size="11.5" font-weight="600">Third-party vendor transparency documentation insufficient</text>
+        <text x="142" y="238" fill="#7A7870" font-size="10">Limited vendor model documentation creates audit exposure</text>
+        <rect x="94" y="248" width="632" height="30" rx="6" fill="rgba(106,155,204,0.06)" stroke="rgba(106,155,204,0.2)" stroke-width="1"/>
+        <rect x="94" y="248" width="3" height="30" rx="1" fill="#6A9BCC"/>
+        <rect x="102" y="253" width="46" height="14" rx="4" fill="rgba(106,155,204,0.15)"/>
+        <text x="125" y="263" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Medium</text>
+        <text x="154" y="263" fill="#141413" font-size="11.5" font-weight="600">Model explainability documentation required</text>
+        <text x="154" y="274" fill="#7A7870" font-size="10">No audit trail for output decisions — explainability report needed</text>
+        <!-- Save button -->
+        <rect x="70" y="284" width="680" height="14" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="596" y="285" width="146" height="12" rx="4" fill="#D97757"/>
+        <text x="669" y="294" fill="white" font-size="10" font-weight="700" text-anchor="middle">Save assessment</text>
+        <rect x="76" y="285" width="56" height="12" rx="4" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="104" y="294" fill="#7A7870" font-size="10" text-anchor="middle">← Back</text>
+      </svg>
+      <figcaption>Wizard Step 4 — review score, tier, and auto-generated findings. Click "Save assessment" to confirm.</figcaption>
+    </figure>
+
+    <table class="field-table">
+      <thead><tr><th>Score range</th><th>Risk tier</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="fname">1 – 3</span></td>
+          <td><span class="tag t-low">Low</span></td>
+          <td>Internal or support tools with limited personal data and strong oversight. Standard annual governance review cycle.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">4 – 6</span></td>
+          <td><span class="tag t-med">Medium</span></td>
+          <td>Systems with moderate impact or data sensitivity. Formal controls required. Semi-annual review recommended.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">7 – 10</span></td>
+          <td><span class="tag t-high">High</span></td>
+          <td>Consequential, regulated, or opaque systems. Immediate remediation of findings required. Quarterly review cycle.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <div class="ci">ℹ️</div>
+      <div><strong>Findings are generated automatically.</strong> You do not need to create them manually. Any dimension scoring above its threshold produces a finding that flows directly to Risk Management when you save.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 6 ── -->
+  <div class="section" id="s6">
+    <div class="step-label">Step 06</div>
+    <h2 class="step-title">What happens automatically</h2>
+    <p class="step-intro">When you click <strong>Save assessment</strong>, the record updates and four things happen across GovernAI without any further action needed.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="160" fill="#FAF9F5"/>
+        <rect x="196" y="0" width="624" height="36" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="22" fill="#141413" font-size="13" font-weight="600">Risk Assessment Engine</text>
+        <rect x="474" y="6" width="174" height="22" rx="6" fill="rgba(120,140,93,0.12)" stroke="rgba(120,140,93,0.3)" stroke-width="1"/>
+        <text x="561" y="20" fill="#788C5D" font-size="11" font-weight="600" text-anchor="middle">✓ All changes saved</text>
+        <rect x="196" y="36" width="624" height="30" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="56" fill="#7A7870" font-size="11">All  Pending  Complete  High Risk</text>
+        <!-- Existing provisional rows -->
+        <rect x="196" y="66" width="624" height="24" fill="white"/>
+        <rect x="196" y="66" width="3" height="24" fill="#C0634A"/>
+        <text x="210" y="81" fill="#7A7870" font-size="9" font-family="DM Mono,monospace">SYS-001</text>
+        <text x="268" y="81" fill="#141413" font-size="11">Credit Underwriting AI</text>
+        <rect x="640" y="72" width="60" height="14" rx="5" fill="rgba(192,99,74,0.1)"/>
+        <text x="670" y="82" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Provisional</text>
+        <line x1="196" y1="90" x2="820" y2="90" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- SYS-007 now Complete + scored -->
+        <rect x="196" y="90" width="624" height="32" fill="rgba(120,140,93,0.05)" stroke="#788C5D" stroke-width="1"/>
+        <rect x="196" y="90" width="3" height="32" fill="#788C5D"/>
+        <text x="210" y="109" fill="#7A7870" font-size="9" font-family="DM Mono,monospace">SYS-007</text>
+        <text x="268" y="109" fill="#141413" font-size="11" font-weight="700">Customer Churn Predictor</text>
+        <text x="480" y="109" fill="#7A7870" font-size="10">Compliance</text>
+        <circle cx="598" cy="106" r="11" fill="none" stroke="#D97757" stroke-width="2.5"/>
+        <text x="598" y="111" fill="#D97757" font-size="10" font-weight="700" text-anchor="middle">4</text>
+        <rect x="616" y="98" width="60" height="16" rx="5" fill="rgba(217,119,87,0.15)"/>
+        <text x="646" y="109" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">Medium</text>
+        <rect x="682" y="98" width="60" height="16" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="712" y="109" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">Complete</text>
+        <line x1="196" y1="122" x2="820" y2="122" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="196" y="122" width="3" height="24" fill="#6A9BCC"/>
+        <text x="268" y="138" fill="#141413" font-size="11">Clinical Decision Support</text>
+        <rect x="640" y="128" width="60" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="670" y="138" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Provisional</text>
+        <line x1="196" y1="146" x2="820" y2="146" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="268" y="158" fill="#7A7870" font-size="11">Fraud Detection AI ···</text>
+      </svg>
+      <figcaption>After saving — the system moves from Provisional to Complete with its score and risk tier shown</figcaption>
+    </figure>
+
+    <div class="effects">
+      <div class="effect">
+        <div class="effect-icon">✅</div>
+        <div class="effect-title">Status changes to Complete</div>
+        <div class="effect-desc">The system row shows "Complete" with its score and risk tier. The provisional record is replaced by the formal assessment.</div>
+      </div>
+      <div class="effect">
+        <div class="effect-icon">🛡</div>
+        <div class="effect-title">Findings flow to Risk Management</div>
+        <div class="effect-desc">All auto-generated findings appear immediately in the Risk Management module, grouped under this system and ready for triage and ownership assignment.</div>
+      </div>
+      <div class="effect">
+        <div class="effect-icon">📋</div>
+        <div class="effect-title">Two Playbook tasks auto-complete</div>
+        <div class="effect-desc">MAP 2a (risk identification) and MEASURE 1 (metrics baseline) are marked complete in the Governance Playbook automatically.</div>
+      </div>
+      <div class="effect">
+        <div class="effect-icon">📊</div>
+        <div class="effect-title">Dashboard maturity updates</div>
+        <div class="effect-desc">The "AI Systems Assessed" metric increases and the Program Maturity score recalculates on the GRC Dashboard.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 7 ── -->
+  <div class="section" id="s7">
+    <div class="step-label">Step 07</div>
+    <h2 class="step-title">Next steps</h2>
+    <p class="step-intro">With the assessment saved, address the findings it generated and continue building out governance coverage for this system.</p>
+
+    <ul class="next-steps">
+      <li class="ns-item">
+        <div class="ns-num">1</div>
+        <div><strong>Triage findings in Risk Management.</strong> Navigate to Risk Management — your auto-generated findings are already there. For each finding: assign a treatment pathway (Mitigate, Accept, Transfer, or Avoid), assign a named owner, and set a remediation deadline.</div>
+      </li>
+      <li class="ns-item">
+        <div class="ns-num">2</div>
+        <div><strong>Complete Vendor Due Diligence.</strong> If the vendor for this system has not yet been assessed, navigate to Vendor Due Diligence → find the vendor record → click "+ New assessment" → complete the 53-question framework.</div>
+      </li>
+      <li class="ns-item">
+        <div class="ns-num">3</div>
+        <div><strong>Review the Governance Playbook.</strong> Navigate to the Playbook — MAP 2 and MEASURE 1 tasks have auto-completed. Check remaining open tasks in those phases and assign owners to any that are unassigned.</div>
+      </li>
+      <li class="ns-item">
+        <div class="ns-num">4</div>
+        <div><strong>Return to the GRC Dashboard.</strong> Check your updated Program Maturity score and review any new Priority Alerts. High-risk assessments generate urgent alerts that require immediate attention.</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">GovernAI · Risk Assessment Engine — Performing a Risk Assessment · NIST AI RMF MAP 2 · MEASURE</div>
+    <a href="index.html" class="footer-btn">← Back to GovernAI</a>
+  </div>
+
+</div>
+</body>
+</html>

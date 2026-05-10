@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovernAI — How to Perform a Vendor Due Diligence Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --charcoal:#141413;--orange:#D97757;--orange-dk:#C15F3C;
+  --cream:#FAF9F5;--white:#fff;--gray:#7A7870;
+  --gray-line:#E8E6DC;--gray-bg:#F5F4EF;
+  --blue:#6A9BCC;--green:#788C5D;--red:#C0634A;
+}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--white);color:var(--charcoal);line-height:1.65;font-size:15px;}
+.topbar{background:var(--charcoal);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;position:sticky;top:0;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.logo-sq{width:26px;height:26px;background:var(--orange);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.logo-sq svg{width:13px;height:13px;}
+.logo-name{font-family:"DM Serif Display",serif;font-size:16px;color:var(--cream);}
+.logo-name span{color:var(--orange);}
+.topbar-right{display:flex;gap:10px;align-items:center;}
+.back-link{font-size:12px;color:rgba(250,249,245,.4);text-decoration:none;padding:5px 12px;border:1px solid rgba(255,255,255,.1);border-radius:7px;}
+.back-link:hover{color:var(--cream);}
+.print-btn{font-size:11px;font-weight:600;color:var(--cream);background:var(--orange);border:none;border-radius:7px;padding:6px 14px;cursor:pointer;font-family:"DM Sans",sans-serif;}
+.print-btn:hover{background:var(--orange-dk);}
+.page{max-width:820px;margin:0 auto;padding:56px 40px 100px;}
+.cover{margin-bottom:52px;padding-bottom:40px;border-bottom:2px solid var(--charcoal);}
+.cover-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.cover-label::before{content:"";width:16px;height:2px;background:var(--orange);display:block;}
+.cover h1{font-family:"DM Serif Display",serif;font-size:44px;line-height:1.08;color:var(--charcoal);margin-bottom:12px;}
+.cover-intro{font-size:15px;color:var(--gray);line-height:1.7;max-width:580px;margin-bottom:28px;}
+.cover-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:12px;color:var(--gray);padding:4px 12px;border-radius:20px;border:1px solid var(--gray-line);background:var(--gray-bg);}
+.toc{margin-bottom:56px;}
+.toc-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+.toc-list{list-style:none;}
+.toc-item a{display:flex;align-items:baseline;gap:10px;padding:8px 0;text-decoration:none;color:var(--charcoal);font-size:14px;border-bottom:1px solid var(--gray-line);transition:color .12s;}
+.toc-item:last-child a{border-bottom:none;}
+.toc-item a:hover{color:var(--orange);}
+.toc-n{font-family:"DM Mono",monospace;font-size:10px;color:var(--gray);width:24px;flex-shrink:0;}
+.toc-dot{flex:1;border-bottom:1px dotted var(--gray-line);margin:0 6px;align-self:flex-end;padding-bottom:3px;}
+.section{margin-bottom:60px;padding-top:8px;}
+.section-divider{height:1px;background:var(--gray-line);margin:52px 0;}
+.step-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+h2.step-title{font-family:"DM Serif Display",serif;font-size:28px;color:var(--charcoal);margin-bottom:10px;line-height:1.15;}
+.step-intro{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:28px;}
+.screen-fig{border:1px solid var(--gray-line);border-radius:10px;overflow:hidden;margin:24px 0;}
+.screen-fig svg{display:block;width:100%;}
+figcaption{font-size:11px;font-family:"DM Mono",monospace;color:var(--gray);padding:9px 16px;background:var(--gray-bg);border-top:1px solid var(--gray-line);display:flex;align-items:center;gap:6px;}
+figcaption::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.field-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13.5px;}
+.field-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);padding:8px 14px;border-bottom:2px solid var(--charcoal);background:var(--gray-bg);}
+.field-table td{padding:11px 14px;border-bottom:1px solid var(--gray-line);vertical-align:top;line-height:1.55;}
+.field-table tr:last-child td{border-bottom:none;}
+.fname{font-weight:700;}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.t-req{background:rgba(192,99,74,.1);color:var(--red);}
+.t-opt{background:rgba(122,120,112,.1);color:var(--gray);}
+.t-pass{background:rgba(120,140,93,.12);color:var(--green);}
+.callout{border-radius:8px;padding:14px 18px;margin:20px 0;display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;}
+.ci{font-size:16px;flex-shrink:0;margin-top:1px;}
+.callout.warn{background:rgba(192,99,74,.07);border:1px solid rgba(192,99,74,.2);}
+.callout.info{background:rgba(120,140,93,.07);border:1px solid rgba(120,140,93,.2);}
+.callout strong{font-weight:700;}
+.next-steps{list-style:none;display:flex;flex-direction:column;gap:12px;margin:20px 0;}
+.ns-item{display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.55;}
+.ns-num{width:26px;height:26px;border-radius:50%;background:var(--charcoal);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.effects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0;}
+.effect{background:var(--gray-bg);border:1px solid var(--gray-line);border-radius:10px;padding:18px 16px;}
+.effect-icon{font-size:20px;margin-bottom:8px;}
+.effect-title{font-size:12px;font-weight:700;color:var(--charcoal);margin-bottom:5px;}
+.effect-desc{font-size:12px;color:var(--gray);line-height:1.5;}
+.domain-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+.domain-card{background:var(--gray-bg);border:1px solid var(--gray-line);border-radius:8px;padding:14px 16px;}
+.domain-name{font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:3px;}
+.domain-count{font-size:11px;color:var(--gray);}
+.footer{border-top:1px solid var(--gray-line);padding-top:32px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-text{font-size:12px;color:var(--gray);}
+.footer-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:var(--charcoal);color:var(--cream);border-radius:9px;text-decoration:none;font-size:13px;font-weight:600;}
+.footer-btn:hover{background:var(--orange);}
+@media print{.topbar,.print-btn{display:none;}.page{padding:0;max-width:100%;}.section{page-break-inside:avoid;}}
+@media(max-width:640px){.page{padding:28px 20px 60px;}.cover h1{font-size:32px;}.topbar{padding:0 20px;}.domain-grid{grid-template-columns:1fr;}.effects{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="logo-sq"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7l-8-4z" fill="white" opacity=".9"/><path d="M9 12l2 2 4-4" stroke="#D97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span class="logo-name">Govern<span>AI</span></span>
+  </a>
+  <div class="topbar-right">
+    <a href="index.html" class="back-link">← Back to GovernAI</a>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">Instruction Manual · Vendor Due Diligence</div>
+    <h1>How to Perform a<br>Vendor Due Diligence<br>Assessment</h1>
+    <p class="cover-intro">Vendor Due Diligence (VDD) evaluates the AI governance posture of every vendor supplying AI systems to your organisation. A VDD record is created automatically when you register a system. This manual walks you through completing the formal assessment.</p>
+    <div class="cover-chips">
+      <span class="chip">🤝 4-step wizard</span>
+      <span class="chip">53 questions across 6 domains</span>
+      <span class="chip">9-item contract checklist</span>
+      <span class="chip">🛡 SR 11-7 · EU AI Act Art. 28</span>
+      <span class="chip">⏱ ~20 minutes</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-label">Steps</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#s1"><span class="toc-n">01</span>Open the Vendor Due Diligence module<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s2"><span class="toc-n">02</span>Start a new assessment &amp; select a vendor<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s3"><span class="toc-n">03</span>Score the six governance domains<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s4"><span class="toc-n">04</span>Complete the contract provisions checklist<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s5"><span class="toc-n">05</span>Review results &amp; save<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s6"><span class="toc-n">06</span>What happens automatically<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s7"><span class="toc-n">07</span>Next steps<span class="toc-dot"></span></a></li>
+    </ul>
+  </div>
+
+
+  <!-- ── STEP 1 ── -->
+  <div class="section" id="s1">
+    <div class="step-label">Step 01</div>
+    <h2 class="step-title">Open the Vendor Due Diligence module</h2>
+    <p class="step-intro">Click <strong>Vendor Due Diligence</strong> in the left sidebar. The module lists all vendors linked to registered AI systems. A vendor not yet assessed shows as <strong>Pending</strong>. When you registered the Customer Churn Predictor, a Pending VDD record was created automatically for that vendor.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker></defs>
+        <rect width="820" height="220" fill="#FAF9F5"/>
+        <!-- Sidebar -->
+        <rect width="196" height="220" fill="#141413"/>
+        <rect x="10" y="12" width="22" height="22" rx="6" fill="#D97757"/>
+        <text x="21" y="27" fill="white" font-size="10" font-weight="700" text-anchor="middle">G</text>
+        <text x="38" y="27" fill="#FAF9F5" font-size="12" font-family="DM Serif Display, serif">GovernAI</text>
+        <text x="12" y="54" fill="#7A7870" font-size="8" font-weight="700" letter-spacing="1.2">OVERVIEW</text>
+        <text x="28" y="70" fill="#7A7870" font-size="11">GRC Dashboard</text>
+        <text x="12" y="94" fill="#7A7870" font-size="8" font-weight="700" letter-spacing="1.2">MODULES</text>
+        <text x="28" y="110" fill="#7A7870" font-size="11">Governance Playbook</text>
+        <text x="28" y="130" fill="#7A7870" font-size="11">AI Inventory</text>
+        <text x="28" y="150" fill="#7A7870" font-size="11">Risk Assessment</text>
+        <rect x="6" y="156" width="184" height="26" rx="7" fill="rgba(217,119,87,0.15)"/>
+        <text x="28" y="173" fill="#D97757" font-size="11" font-weight="600">Vendor Due Diligence</text>
+        <text x="28" y="200" fill="#7A7870" font-size="11">Risk Management</text>
+        <!-- Main -->
+        <rect x="196" y="0" width="624" height="38" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="23" fill="#141413" font-size="13" font-weight="600">Vendor Due Diligence</text>
+        <!-- Controls -->
+        <rect x="196" y="38" width="624" height="34" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="208" y="46" width="36" height="20" rx="10" fill="#141413"/>
+        <text x="226" y="59" fill="white" font-size="10" font-weight="600" text-anchor="middle">All</text>
+        <rect x="250" y="46" width="58" height="20" rx="10" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="279" y="59" fill="#7A7870" font-size="10" text-anchor="middle">Pending</text>
+        <rect x="314" y="46" width="66" height="20" rx="10" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="347" y="59" fill="#7A7870" font-size="10" text-anchor="middle">Approved</text>
+        <rect x="386" y="46" width="66" height="20" rx="10" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="419" y="59" fill="#7A7870" font-size="10" text-anchor="middle">Flagged</text>
+        <rect x="634" y="44" width="170" height="24" rx="7" fill="#D97757"/>
+        <text x="719" y="59" fill="white" font-size="11" font-weight="700" text-anchor="middle">+ New assessment</text>
+        <!-- Vendor rows -->
+        <rect x="196" y="72" width="624" height="32" fill="white"/>
+        <text x="212" y="91" fill="#141413" font-size="12" font-weight="600">Zest AI</text>
+        <text x="320" y="91" fill="#7A7870" font-size="10">1 system · Credit Underwriting AI</text>
+        <rect x="626" y="79" width="50" height="14" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="651" y="89" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">Approved</text>
+        <text x="686" y="89" fill="#788C5D" font-size="11" font-weight="700">82</text>
+        <line x1="196" y1="104" x2="820" y2="104" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="196" y="104" width="624" height="32" fill="white"/>
+        <text x="212" y="123" fill="#141413" font-size="12" font-weight="600">Nuance</text>
+        <text x="320" y="123" fill="#7A7870" font-size="10">1 system · Clinical Decision Support</text>
+        <rect x="626" y="111" width="70" height="14" rx="5" fill="rgba(217,119,87,0.12)"/>
+        <text x="661" y="121" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">Conditional</text>
+        <text x="706" y="121" fill="#D97757" font-size="11" font-weight="700">61</text>
+        <line x1="196" y1="136" x2="820" y2="136" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Internal — newly created, highlighted -->
+        <rect x="196" y="136" width="624" height="36" fill="rgba(120,140,93,0.05)" stroke="#788C5D" stroke-width="1"/>
+        <rect x="196" y="136" width="3" height="36" fill="#788C5D"/>
+        <text x="212" y="157" fill="#141413" font-size="12" font-weight="700">Internal</text>
+        <text x="320" y="157" fill="#7A7870" font-size="10">1 system · Customer Churn Predictor</text>
+        <rect x="626" y="144" width="52" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="652" y="154" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Pending</text>
+        <rect x="686" y="144" width="34" height="14" rx="5" fill="#788C5D"/>
+        <text x="703" y="154" fill="white" font-size="9" font-weight="700" text-anchor="middle">NEW</text>
+        <!-- Annotation -->
+        <path d="M740 154 L768 154" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a1)"/>
+        <rect x="770" y="142" width="108" height="24" rx="4" fill="#D97757"/>
+        <text x="824" y="157" fill="white" font-size="10.5" font-weight="700" text-anchor="middle">Assess this vendor</text>
+        <line x1="196" y1="172" x2="820" y2="172" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="192" fill="#141413" font-size="12">OpenAI</text>
+        <text x="320" y="192" fill="#7A7870" font-size="10">1 system · HR Screening Assistant</text>
+        <rect x="626" y="182" width="52" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="652" y="192" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Pending</text>
+      </svg>
+      <figcaption>Vendor Due Diligence — the vendor for your newly registered system appears as "Pending" with a NEW badge</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 2 ── -->
+  <div class="section" id="s2">
+    <div class="step-label">Step 02</div>
+    <h2 class="step-title">Start a new assessment &amp; select a vendor</h2>
+    <p class="step-intro">Click <strong>+ New assessment</strong>. The 4-step wizard opens. Step 1 shows all vendors — click the vendor you want to assess to select it, then click <strong>Next</strong>.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 290" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs>
+          <filter id="sh"><feDropShadow dx="0" dy="6" stdDeviation="18" flood-color="rgba(0,0,0,0.22)"/></filter>
+          <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker>
+        </defs>
+        <rect width="820" height="290" fill="rgba(20,20,19,0.45)"/>
+        <rect x="70" y="14" width="680" height="262" rx="13" fill="white" filter="url(#sh)"/>
+        <!-- Header -->
+        <rect x="70" y="14" width="680" height="50" rx="13" fill="#141413"/>
+        <rect x="70" y="40" width="680" height="24" fill="#141413"/>
+        <text x="94" y="35" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 1 OF 4</text>
+        <text x="94" y="52" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Select vendor</text>
+        <circle cx="724" cy="33" r="10" fill="rgba(255,255,255,0.08)"/>
+        <text x="724" y="38" fill="rgba(255,255,255,0.4)" font-size="12" text-anchor="middle">✕</text>
+        <!-- Step tabs -->
+        <rect x="70" y="64" width="680" height="26" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="70" y="64" width="170" height="26" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="70" y="87" width="170" height="3" fill="#D97757"/>
+        <text x="155" y="81" fill="#D97757" font-size="11" font-weight="600" text-anchor="middle">Select vendor</text>
+        <text x="325" y="81" fill="#B0AEA5" font-size="11" text-anchor="middle">Domain scores</text>
+        <text x="495" y="81" fill="#B0AEA5" font-size="11" text-anchor="middle">Contract review</text>
+        <text x="665" y="81" fill="#B0AEA5" font-size="11" text-anchor="middle">Results</text>
+        <text x="94" y="110" fill="#7A7870" font-size="11.5">Select a vendor to assess. Vendors are linked to the AI systems registered in the Inventory.</text>
+        <!-- Vendor options -->
+        <rect x="90" y="120" width="640" height="34" rx="7" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="108" y="139" fill="#141413" font-size="12" font-weight="600">Zest AI</text>
+        <text x="200" y="139" fill="#7A7870" font-size="10">Credit Underwriting AI</text>
+        <rect x="668" y="128" width="52" height="14" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="694" y="138" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">Approved</text>
+        <rect x="90" y="160" width="640" height="34" rx="7" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="108" y="179" fill="#141413" font-size="12" font-weight="600">Nuance</text>
+        <text x="200" y="179" fill="#7A7870" font-size="10">Clinical Decision Support</text>
+        <rect x="668" y="168" width="70" height="14" rx="5" fill="rgba(217,119,87,0.12)"/>
+        <text x="703" y="178" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">Conditional</text>
+        <!-- Internal — SELECTED -->
+        <rect x="90" y="200" width="640" height="34" rx="7" fill="rgba(217,119,87,0.08)" stroke="#D97757" stroke-width="2"/>
+        <text x="108" y="219" fill="#141413" font-size="12" font-weight="700">Internal</text>
+        <text x="200" y="219" fill="#7A7870" font-size="10">Customer Churn Predictor · Compliance</text>
+        <rect x="668" y="208" width="52" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="694" y="218" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Pending</text>
+        <circle cx="738" cy="217" r="9" fill="#D97757"/>
+        <path d="M734 217 l3.5 3.5 5.5-5.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <!-- Annotation -->
+        <path d="M747 217 L772 217" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a2)"/>
+        <rect x="774" y="205" width="110" height="24" rx="5" fill="#D97757"/>
+        <text x="829" y="220" fill="white" font-size="10.5" font-weight="700" text-anchor="middle">Click to select</text>
+        <!-- Footer -->
+        <rect x="70" y="252" width="680" height="24" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="664" y="254" width="78" height="18" rx="5" fill="#D97757"/>
+        <text x="703" y="266" fill="white" font-size="11" font-weight="700" text-anchor="middle">Next →</text>
+        <rect x="76" y="254" width="56" height="18" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="104" y="266" fill="#7A7870" font-size="10" text-anchor="middle">Cancel</text>
+      </svg>
+      <figcaption>Wizard Step 1 — click the vendor to select it (orange border confirms), then click Next</figcaption>
+    </figure>
+
+    <div class="callout info">
+      <div class="ci">💾</div>
+      <div><strong>You can save a draft at any time.</strong> The wizard saves your progress automatically as you move between steps. If you need to gather more information from the vendor, exit and return later — your answers will be waiting.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 3 ── -->
+  <div class="section" id="s3">
+    <div class="step-label">Step 03</div>
+    <h2 class="step-title">Score the six governance domains</h2>
+    <p class="step-intro">Step 2 presents 53 Yes/No questions across six governance domains. Answer <strong>Yes only when you have documented evidence</strong>. Each domain is scored as a percentage of Yes answers and feeds into the overall vendor score.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 380" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="380" fill="rgba(20,20,19,0.45)"/>
+        <rect x="50" y="12" width="720" height="356" rx="13" fill="white" filter="url(#sh)"/>
+        <rect x="50" y="12" width="720" height="50" rx="13" fill="#141413"/>
+        <rect x="50" y="38" width="720" height="24" fill="#141413"/>
+        <text x="74" y="33" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 2 OF 4</text>
+        <text x="74" y="50" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Domain scores — Internal</text>
+        <!-- Tabs -->
+        <rect x="50" y="62" width="720" height="24" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="220" y="62" width="180" height="24" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="220" y="83" width="180" height="3" fill="#D97757"/>
+        <text x="135" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Select vendor</text>
+        <text x="310" y="78" fill="#D97757" font-size="10" font-weight="600" text-anchor="middle">Domain scores</text>
+        <text x="490" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">Contract review</text>
+        <text x="670" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">Results</text>
+        <!-- Domain section header -->
+        <text x="74" y="106" fill="#141413" font-size="13" font-weight="700">Model Governance</text>
+        <text x="74" y="120" fill="#7A7870" font-size="11">Assesses whether the vendor has a structured approach to overseeing AI models.</text>
+        <text x="680" y="110" fill="#7A7870" font-size="10">8 questions</text>
+        <!-- Q1 -->
+        <rect x="74" y="128" width="692" height="34" rx="6" fill="#F5F4EF"/>
+        <text x="86" y="148" fill="#141413" font-size="11.5">Does the vendor maintain a formal model inventory documenting all AI models in this product?</text>
+        <text x="86" y="160" fill="#7A7870" font-size="9.5">Look for model registry, version tracking, or equivalent documentation.</text>
+        <!-- Yes / No buttons -->
+        <rect x="690" y="134" width="36" height="22" rx="5" fill="#788C5D"/>
+        <text x="708" y="149" fill="white" font-size="11" font-weight="700" text-anchor="middle">Yes</text>
+        <rect x="730" y="134" width="32" height="22" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="746" y="149" fill="#7A7870" font-size="11" text-anchor="middle">No</text>
+        <!-- Q2 -->
+        <rect x="74" y="166" width="692" height="34" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="86" y="186" fill="#141413" font-size="11.5">Is there a documented model development lifecycle (MDLC) governing model construction?</text>
+        <text x="86" y="198" fill="#7A7870" font-size="9.5">SR 11-7-style MRM frameworks or equivalent internal policies count.</text>
+        <rect x="690" y="172" width="36" height="22" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="708" y="187" fill="#7A7870" font-size="11" text-anchor="middle">Yes</text>
+        <rect x="730" y="172" width="32" height="22" rx="5" fill="#C0634A"/>
+        <text x="746" y="187" fill="white" font-size="11" font-weight="700" text-anchor="middle">No</text>
+        <!-- Q3 -->
+        <rect x="74" y="204" width="692" height="34" rx="6" fill="#F5F4EF"/>
+        <text x="86" y="224" fill="#141413" font-size="11.5">Does the vendor conduct independent model validation before production deployment?</text>
+        <text x="86" y="236" fill="#7A7870" font-size="9.5">Validation by a team separate from the development team.</text>
+        <rect x="690" y="210" width="36" height="22" rx="5" fill="#788C5D"/>
+        <text x="708" y="225" fill="white" font-size="11" font-weight="700" text-anchor="middle">Yes</text>
+        <rect x="730" y="210" width="32" height="22" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="746" y="225" fill="#7A7870" font-size="11" text-anchor="middle">No</text>
+        <!-- Progress indicator -->
+        <rect x="74" y="248" width="692" height="4" rx="2" fill="#E8E6DC"/>
+        <rect x="74" y="248" width="277" height="4" rx="2" fill="#D97757"/>
+        <text x="74" y="264" fill="#7A7870" font-size="10">Question 3 of 8 in this domain</text>
+        <text x="680" y="264" fill="#D97757" font-size="10" font-weight="600">5 remaining</text>
+        <!-- Domain progress panel -->
+        <rect x="74" y="274" width="692" height="76" rx="6" fill="rgba(217,119,87,0.06)" stroke="rgba(217,119,87,0.2)" stroke-width="1"/>
+        <text x="88" y="292" fill="#141413" font-size="11" font-weight="700">Domain progress</text>
+        <!-- Mini domain bars -->
+        <text x="88" y="310" fill="#7A7870" font-size="9.5">Model Governance</text>
+        <rect x="208" y="303" width="130" height="6" rx="3" fill="#E8E6DC"/>
+        <rect x="208" y="303" width="50" height="6" rx="3" fill="#D97757"/>
+        <text x="344" y="310" fill="#7A7870" font-size="9">3/8</text>
+        <text x="88" y="326" fill="#7A7870" font-size="9.5">Data Handling</text>
+        <rect x="208" y="319" width="130" height="6" rx="3" fill="#E8E6DC"/>
+        <text x="344" y="326" fill="#B0AEA5" font-size="9">0/9</text>
+        <text x="380" y="310" fill="#7A7870" font-size="9.5">Security</text>
+        <rect x="454" y="303" width="130" height="6" rx="3" fill="#E8E6DC"/>
+        <text x="590" y="310" fill="#B0AEA5" font-size="9">0/10</text>
+        <text x="380" y="326" fill="#7A7870" font-size="9.5">Transparency</text>
+        <rect x="454" y="319" width="130" height="6" rx="3" fill="#E8E6DC"/>
+        <text x="590" y="326" fill="#B0AEA5" font-size="9">0/8</text>
+        <text x="88" y="342" fill="#7A7870" font-size="9.5">Continuity</text>
+        <rect x="208" y="335" width="130" height="6" rx="3" fill="#E8E6DC"/>
+        <text x="344" y="342" fill="#B0AEA5" font-size="9">0/8</text>
+        <text x="380" y="342" fill="#7A7870" font-size="9.5">Fairness &amp; Bias</text>
+        <rect x="454" y="335" width="130" height="6" rx="3" fill="#E8E6DC"/>
+        <text x="590" y="342" fill="#B0AEA5" font-size="9">0/10</text>
+        <!-- Footer -->
+        <rect x="50" y="356" width="720" height="12" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="74" y="365" fill="#7A7870" font-size="9.5">Complete all 6 domains to continue · 53 questions total</text>
+        <rect x="664" y="357" width="98" height="10" rx="4" fill="#E8E6DC"/>
+        <text x="713" y="365" fill="#B0AEA5" font-size="9" font-weight="700" text-anchor="middle">Next →</text>
+      </svg>
+      <figcaption>Wizard Step 2 — answer Yes/No for each question. Green = Yes, Red = No. Domain progress shown at the bottom.</figcaption>
+    </figure>
+
+    <div class="domain-grid">
+      <div class="domain-card">
+        <div class="domain-name">Model Governance</div>
+        <div class="domain-count">8 questions · Model inventory, MDLC, validation, change management, monitoring</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-name">Data Handling &amp; Residency</div>
+        <div class="domain-count">9 questions · DPA/BAA, training data prohibition, sub-processors, encryption, deletion</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-name">Security</div>
+        <div class="domain-count">10 questions · SOC 2, pen testing, vulnerability management, access controls, incident response</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-name">Transparency &amp; Explainability</div>
+        <div class="domain-count">8 questions · Model cards, output explainability, bias disclosure, performance reporting</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-name">Business Continuity</div>
+        <div class="domain-count">8 questions · RTO/RPO, DR testing, exit planning, contractual SLAs, incident history</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-name">Fairness &amp; Bias Testing</div>
+        <div class="domain-count">10 questions · Bias methodology, protected classes, third-party audits, remediation process</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="ci">⚠️</div>
+      <div><strong>Only select Yes when you have documented evidence.</strong> If the vendor verbally confirms something but has not provided documentation, select No. The assessment must be based on what you can substantiate — not what you have been told.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 4 ── -->
+  <div class="section" id="s4">
+    <div class="step-label">Step 04</div>
+    <h2 class="step-title">Complete the contract provisions checklist</h2>
+    <p class="step-intro">Step 3 presents nine contract provisions that should appear in every AI vendor contract. Check each provision that is confirmed in your current contract. Seven are marked <strong>Required</strong> — missing any will generate a Critical gap finding.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 340" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="340" fill="rgba(20,20,19,0.45)"/>
+        <rect x="50" y="12" width="720" height="316" rx="13" fill="white" filter="url(#sh)"/>
+        <rect x="50" y="12" width="720" height="50" rx="13" fill="#141413"/>
+        <rect x="50" y="38" width="720" height="24" fill="#141413"/>
+        <text x="74" y="33" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 3 OF 4</text>
+        <text x="74" y="50" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Contract review — Internal</text>
+        <!-- Tabs -->
+        <rect x="50" y="62" width="720" height="24" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="400" y="62" width="180" height="24" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="400" y="83" width="180" height="3" fill="#D97757"/>
+        <text x="135" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Select vendor</text>
+        <text x="310" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Domain scores</text>
+        <text x="490" y="78" fill="#D97757" font-size="10" font-weight="600" text-anchor="middle">Contract review</text>
+        <text x="670" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">Results</text>
+        <text x="74" y="104" fill="#7A7870" font-size="11.5">Check each provision that is confirmed in your current vendor contract.</text>
+        <!-- Checklist items -->
+        <!-- cc1: Training data prohibition — CHECKED -->
+        <rect x="74" y="112" width="692" height="28" rx="5" fill="#F5F4EF"/>
+        <rect x="84" y="120" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M86 127 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="104" y="130" fill="#141413" font-size="12" font-weight="600">Training data prohibition</text>
+        <text x="400" y="130" fill="#7A7870" font-size="10.5">Vendor may not train on customer data without explicit consent</text>
+        <rect x="704" y="118" width="52" height="14" rx="4" fill="rgba(192,99,74,0.1)"/>
+        <text x="730" y="128" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Required</text>
+        <!-- cc2: Model change notification — CHECKED -->
+        <rect x="74" y="144" width="692" height="28" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="84" y="152" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M86 159 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="104" y="162" fill="#141413" font-size="12" font-weight="600">Model change notification</text>
+        <text x="400" y="162" fill="#7A7870" font-size="10.5">Vendor must notify of material model updates ≥ 30 days in advance</text>
+        <rect x="704" y="150" width="52" height="14" rx="4" fill="rgba(192,99,74,0.1)"/>
+        <text x="730" y="160" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Required</text>
+        <!-- cc3: Explainability — NOT checked (gap) -->
+        <rect x="74" y="176" width="692" height="28" rx="5" fill="#F5F4EF"/>
+        <rect x="84" y="184" width="14" height="14" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="104" y="194" fill="#141413" font-size="12">Explainability obligation</text>
+        <text x="400" y="194" fill="#7A7870" font-size="10.5">Vendor must provide explanation of AI outputs on request</text>
+        <rect x="704" y="182" width="52" height="14" rx="4" fill="rgba(192,99,74,0.1)"/>
+        <text x="730" y="192" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Required</text>
+        <!-- Annotation on unchecked required -->
+        <rect x="74" y="172" width="692" height="36" rx="5" fill="none" stroke="#C0634A" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <!-- cc4: IP ownership — CHECKED -->
+        <rect x="74" y="208" width="692" height="28" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="84" y="216" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M86 223 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="104" y="226" fill="#141413" font-size="12" font-weight="600">IP ownership of outputs</text>
+        <text x="400" y="226" fill="#7A7870" font-size="10.5">Customer owns all outputs generated using customer data</text>
+        <rect x="704" y="214" width="52" height="14" rx="4" fill="rgba(192,99,74,0.1)"/>
+        <text x="730" y="224" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Required</text>
+        <!-- cc5: Audit rights — NOT checked -->
+        <rect x="74" y="240" width="692" height="28" rx="5" fill="#F5F4EF"/>
+        <rect x="84" y="248" width="14" height="14" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="104" y="258" fill="#141413" font-size="12">Audit rights</text>
+        <text x="400" y="258" fill="#7A7870" font-size="10.5">Customer has right to audit vendor AI practices and controls</text>
+        <rect x="704" y="246" width="52" height="14" rx="4" fill="rgba(192,99,74,0.1)"/>
+        <text x="730" y="256" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">Required</text>
+        <!-- cc8: Bias audit — optional, NOT checked -->
+        <rect x="74" y="272" width="692" height="28" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="84" y="280" width="14" height="14" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="104" y="290" fill="#141413" font-size="12">Bias audit requirement</text>
+        <text x="400" y="290" fill="#7A7870" font-size="10.5">Vendor required to conduct annual third-party bias audit</text>
+        <rect x="704" y="278" width="52" height="14" rx="4" fill="rgba(122,120,112,0.1)"/>
+        <text x="730" y="288" fill="#7A7870" font-size="9" font-weight="700" text-anchor="middle">Optional</text>
+        <!-- Footer -->
+        <rect x="50" y="310" width="720" height="18" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="74" y="322" fill="#7A7870" font-size="10">4 of 7 required provisions confirmed · 2 missing required provisions</text>
+        <rect x="664" y="312" width="98" height="14" rx="5" fill="#D97757"/>
+        <text x="713" y="322" fill="white" font-size="10" font-weight="700" text-anchor="middle">Next →</text>
+      </svg>
+      <figcaption>Wizard Step 3 — check each provision present in your contract. Missing Required provisions become Critical gap findings.</figcaption>
+    </figure>
+
+    <table class="field-table">
+      <thead><tr><th>Provision</th><th>Status</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td><span class="fname">Training data prohibition</span></td><td><span class="tag t-req">Required</span></td><td>Vendor may not use your customer data to train or fine-tune their AI models without your explicit written consent</td></tr>
+        <tr><td><span class="fname">Model change notification</span></td><td><span class="tag t-req">Required</span></td><td>Vendor must give you at least 30 days advance notice of any material changes to the AI model</td></tr>
+        <tr><td><span class="fname">Explainability obligation</span></td><td><span class="tag t-req">Required</span></td><td>Vendor must provide an explanation of any AI output on request — critical for adverse action compliance</td></tr>
+        <tr><td><span class="fname">IP ownership of outputs</span></td><td><span class="tag t-req">Required</span></td><td>Your organisation owns all outputs generated using your customer data</td></tr>
+        <tr><td><span class="fname">Audit rights</span></td><td><span class="tag t-req">Required</span></td><td>You have the right to audit the vendor's AI practices, controls, and model documentation</td></tr>
+        <tr><td><span class="fname">Sub-processor disclosure</span></td><td><span class="tag t-req">Required</span></td><td>Vendor must disclose all sub-processors involved in AI delivery — cloud GPU providers, vector databases, third-party APIs</td></tr>
+        <tr><td><span class="fname">Data deletion / exit terms</span></td><td><span class="tag t-req">Required</span></td><td>Vendor must delete all customer data within 30 days of contract termination, including all copies and training artefacts</td></tr>
+        <tr><td><span class="fname">Bias audit requirement</span></td><td><span class="tag t-opt">Optional</span></td><td>Vendor is contractually required to conduct an annual third-party bias audit</td></tr>
+        <tr><td><span class="fname">SLA with financial penalties</span></td><td><span class="tag t-opt">Optional</span></td><td>Defined uptime and performance SLAs with financial remedies for breach</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <div class="ci">⚠️</div>
+      <div><strong>Use this checklist at contract renewal.</strong> Any Required provision not present in your current contract should become a non-negotiable addition at the next renewal. Missing Required provisions generate Critical findings in Risk Management.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 5 ── -->
+  <div class="section" id="s5">
+    <div class="step-label">Step 05</div>
+    <h2 class="step-title">Review results &amp; save</h2>
+    <p class="step-intro">Step 4 shows your overall vendor score (0–100), the verdict, domain-by-domain breakdown, and any contract gaps identified. Review everything carefully, then click <strong>Save assessment</strong>.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 340" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker></defs>
+        <rect width="820" height="340" fill="rgba(20,20,19,0.45)"/>
+        <rect x="50" y="12" width="720" height="316" rx="13" fill="white" filter="url(#sh)"/>
+        <rect x="50" y="12" width="720" height="50" rx="13" fill="#141413"/>
+        <rect x="50" y="38" width="720" height="24" fill="#141413"/>
+        <text x="74" y="33" fill="#D97757" font-size="9" font-weight="700" letter-spacing="1">STEP 4 OF 4</text>
+        <text x="74" y="50" fill="#FAF9F5" font-size="14" font-weight="700" font-family="DM Serif Display, serif">Results — Internal</text>
+        <!-- Tabs all complete -->
+        <rect x="50" y="62" width="720" height="24" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="580" y="62" width="190" height="24" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="580" y="83" width="190" height="3" fill="#D97757"/>
+        <text x="135" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Select vendor</text>
+        <text x="310" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Domain scores</text>
+        <text x="490" y="78" fill="#B0AEA5" font-size="10" text-anchor="middle">✓ Contract review</text>
+        <text x="675" y="78" fill="#D97757" font-size="10" font-weight="600" text-anchor="middle">Results</text>
+        <!-- Score ring - score 58, Conditional -->
+        <circle cx="152" cy="172" r="52" fill="none" stroke="#E8E6DC" stroke-width="10"/>
+        <circle cx="152" cy="172" r="52" fill="none" stroke="#D97757" stroke-width="10"
+          stroke-dasharray="326.7" stroke-dashoffset="137.2"
+          stroke-linecap="round" transform="rotate(-90 152 172)"/>
+        <text x="152" y="168" fill="#D97757" font-size="26" font-weight="700" text-anchor="middle">58</text>
+        <text x="152" y="186" fill="#7A7870" font-size="11" text-anchor="middle">/ 100</text>
+        <!-- Verdict -->
+        <text x="230" y="118" fill="#D97757" font-size="20" font-weight="700" font-family="DM Serif Display, serif">Conditional</text>
+        <text x="230" y="136" fill="#7A7870" font-size="12">Internal — Customer Churn Predictor</text>
+        <!-- Verdict bands -->
+        <rect x="230" y="148" width="78" height="16" rx="5" fill="rgba(192,99,74,0.12)"/>
+        <text x="269" y="159" fill="#C0634A" font-size="9.5" font-weight="700" text-anchor="middle">Flagged  &lt;50</text>
+        <rect x="314" y="148" width="86" height="16" rx="5" fill="rgba(217,119,87,0.18)"/>
+        <text x="357" y="159" fill="#D97757" font-size="9.5" font-weight="700" text-anchor="middle">Conditional  50–74</text>
+        <rect x="406" y="148" width="80" height="16" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="446" y="159" fill="#788C5D" font-size="9.5" font-weight="700" text-anchor="middle">Approved  ≥75</text>
+        <!-- Domain bar breakdown -->
+        <text x="230" y="186" fill="#141413" font-size="11" font-weight="700">Domain breakdown</text>
+        <!-- Domain bars -->
+        <text x="230" y="204" fill="#7A7870" font-size="10">Model Governance</text>
+        <rect x="360" y="197" width="180" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="360" y="197" width="108" height="8" rx="4" fill="#D97757"/>
+        <text x="548" y="205" fill="#D97757" font-size="10" font-weight="700">60%</text>
+        <text x="230" y="220" fill="#7A7870" font-size="10">Data Handling</text>
+        <rect x="360" y="213" width="180" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="360" y="213" width="144" height="8" rx="4" fill="#788C5D"/>
+        <text x="548" y="221" fill="#788C5D" font-size="10" font-weight="700">80%</text>
+        <text x="230" y="236" fill="#7A7870" font-size="10">Security</text>
+        <rect x="360" y="229" width="180" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="360" y="229" width="126" height="8" rx="4" fill="#D97757"/>
+        <text x="548" y="237" fill="#D97757" font-size="10" font-weight="700">70%</text>
+        <text x="230" y="252" fill="#7A7870" font-size="10">Transparency</text>
+        <rect x="360" y="245" width="180" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="360" y="245" width="72" height="8" rx="4" fill="#C0634A"/>
+        <text x="548" y="253" fill="#C0634A" font-size="10" font-weight="700">40%</text>
+        <text x="230" y="268" fill="#7A7870" font-size="10">Business Continuity</text>
+        <rect x="360" y="261" width="180" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="360" y="261" width="126" height="8" rx="4" fill="#D97757"/>
+        <text x="548" y="269" fill="#D97757" font-size="10" font-weight="700">70%</text>
+        <text x="230" y="284" fill="#7A7870" font-size="10">Fairness &amp; Bias</text>
+        <rect x="360" y="277" width="180" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="360" y="277" width="90" height="8" rx="4" fill="#D97757"/>
+        <text x="548" y="285" fill="#D97757" font-size="10" font-weight="700">50%</text>
+        <!-- Contract gap warning -->
+        <rect x="74" y="296" width="450" height="14" rx="4" fill="rgba(192,99,74,0.08)" stroke="rgba(192,99,74,0.25)" stroke-width="1"/>
+        <text x="84" y="307" fill="#C0634A" font-size="10" font-weight="600">⚠  2 required contract provisions missing — Critical findings generated</text>
+        <!-- Save button -->
+        <rect x="50" y="310" width="720" height="18" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="596" y="312" width="166" height="14" rx="5" fill="#D97757"/>
+        <text x="679" y="322" fill="white" font-size="10" font-weight="700" text-anchor="middle">Save assessment</text>
+        <rect x="56" y="312" width="56" height="14" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="84" y="322" fill="#7A7870" font-size="10" text-anchor="middle">← Back</text>
+      </svg>
+      <figcaption>Wizard Step 4 — overall score, verdict, domain breakdown, and contract gaps. Click "Save assessment" to confirm.</figcaption>
+    </figure>
+
+    <table class="field-table">
+      <thead><tr><th>Score range</th><th>Verdict</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="fname">75 – 100</span></td>
+          <td><span class="tag t-pass">Approved</span></td>
+          <td>Vendor meets governance requirements. Standard annual review. Minor gaps should be addressed at next contract renewal.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">50 – 74</span></td>
+          <td><span class="tag" style="background:rgba(217,119,87,.12);color:var(--orange-dk);">Conditional</span></td>
+          <td>Significant gaps identified. Vendor may continue operating but gaps must be remediated with a documented timeline. Enhanced monitoring required.</td>
+        </tr>
+        <tr>
+          <td><span class="fname">0 – 49</span></td>
+          <td><span class="tag t-req">Flagged</span></td>
+          <td>Vendor fails governance threshold. Escalation to risk committee required. Consider suspension of new use cases pending remediation.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <div class="ci">ℹ️</div>
+      <div><strong>Score formula:</strong> Domain scores account for 70% of the total. Contract provision coverage accounts for 30%. A vendor can have strong domain scores but still score Conditional if Required contract provisions are missing.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 6 ── -->
+  <div class="section" id="s6">
+    <div class="step-label">Step 06</div>
+    <h2 class="step-title">What happens automatically</h2>
+    <p class="step-intro">When you click <strong>Save assessment</strong>, the vendor record updates and four things happen across GovernAI without further action needed.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 170" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="170" fill="#FAF9F5"/>
+        <rect x="196" y="0" width="624" height="36" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="22" fill="#141413" font-size="13" font-weight="600">Vendor Due Diligence</text>
+        <rect x="474" y="6" width="174" height="22" rx="6" fill="rgba(120,140,93,0.12)" stroke="rgba(120,140,93,0.3)" stroke-width="1"/>
+        <text x="561" y="20" fill="#788C5D" font-size="11" font-weight="600" text-anchor="middle">✓ All changes saved</text>
+        <rect x="196" y="36" width="624" height="28" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="55" fill="#7A7870" font-size="11">All  Pending  Approved  Conditional  Flagged</text>
+        <!-- Zest AI - approved -->
+        <rect x="196" y="64" width="624" height="26" fill="white"/>
+        <text x="212" y="80" fill="#141413" font-size="12">Zest AI</text>
+        <text x="310" y="80" fill="#7A7870" font-size="10">1 system</text>
+        <rect x="626" y="70" width="50" height="14" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="651" y="80" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">Approved</text>
+        <text x="688" y="80" fill="#788C5D" font-size="12" font-weight="700">82</text>
+        <line x1="196" y1="90" x2="820" y2="90" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Internal - now Conditional, scored -->
+        <rect x="196" y="90" width="624" height="34" fill="rgba(120,140,93,0.04)" stroke="#788C5D" stroke-width="1"/>
+        <rect x="196" y="90" width="3" height="34" fill="#D97757"/>
+        <text x="212" y="110" fill="#141413" font-size="12" font-weight="700">Internal</text>
+        <text x="310" y="110" fill="#7A7870" font-size="10">1 system · Customer Churn Predictor</text>
+        <rect x="580" y="98" width="70" height="14" rx="5" fill="rgba(217,119,87,0.15)"/>
+        <text x="615" y="108" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">Conditional</text>
+        <text x="664" y="108" fill="#D97757" font-size="12" font-weight="700">58</text>
+        <rect x="680" y="98" width="54" height="14" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="707" y="108" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">Complete</text>
+        <line x1="196" y1="124" x2="820" y2="124" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="143" fill="#141413" font-size="12">Nuance</text>
+        <text x="310" y="143" fill="#7A7870" font-size="10">1 system</text>
+        <rect x="626" y="133" width="70" height="14" rx="5" fill="rgba(217,119,87,0.12)"/>
+        <text x="661" y="143" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">Conditional</text>
+        <text x="706" y="143" fill="#D97757" font-size="12" font-weight="700">61</text>
+        <line x1="196" y1="155" x2="820" y2="155" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="167" fill="#141413" font-size="12">OpenAI</text>
+        <rect x="626" y="158" width="52" height="14" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="652" y="168" fill="#6A9BCC" font-size="9" font-weight="700" text-anchor="middle">Pending</text>
+      </svg>
+      <figcaption>After saving — vendor moves from Pending to Conditional with its score displayed</figcaption>
+    </figure>
+
+    <div class="effects">
+      <div class="effect">
+        <div class="effect-icon">✅</div>
+        <div class="effect-title">Vendor status updated</div>
+        <div class="effect-desc">The vendor row shows the verdict (Approved, Conditional, or Flagged) with the numerical score. The Pending status is replaced by the formal assessment result.</div>
+      </div>
+      <div class="effect">
+        <div class="effect-icon">🛡</div>
+        <div class="effect-title">Gap findings flow to Risk Management</div>
+        <div class="effect-desc">Any domain scoring below threshold and any missing Required contract provisions generate findings automatically in Risk Management, ready for triage and ownership assignment.</div>
+      </div>
+      <div class="effect">
+        <div class="effect-icon">📋</div>
+        <div class="effect-title">Playbook task auto-completes</div>
+        <div class="effect-desc">The MAP 2 Vendor due diligence task in the Governance Playbook is automatically marked complete for the linked AI system.</div>
+      </div>
+      <div class="effect">
+        <div class="effect-icon">📊</div>
+        <div class="effect-title">Dashboard vendor coverage updates</div>
+        <div class="effect-desc">The "Vendor Coverage" metric on the GRC Dashboard increases and the Program Maturity score recalculates. Flagged vendors generate Priority Alerts.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 7 ── -->
+  <div class="section" id="s7">
+    <div class="step-label">Step 07</div>
+    <h2 class="step-title">Next steps</h2>
+    <p class="step-intro">With the VDD assessment saved, address the gap findings it generated and use the results to strengthen your vendor contract and monitoring approach.</p>
+
+    <ul class="next-steps">
+      <li class="ns-item">
+        <div class="ns-num">1</div>
+        <div><strong>Triage gap findings in Risk Management.</strong> Navigate to Risk Management — your auto-generated findings are already there. For each gap finding: assign a treatment pathway, name an owner, and set a remediation deadline. Contract gaps should be assigned to your legal or procurement team for resolution at next renewal.</div>
+      </li>
+      <li class="ns-item">
+        <div class="ns-num">2</div>
+        <div><strong>Use the contract checklist at renewal.</strong> Any Required provision missing from your current contract should be a non-negotiable addition. Export the VDD results and share with your legal team before entering renewal negotiations.</div>
+      </li>
+      <li class="ns-item">
+        <div class="ns-num">3</div>
+        <div><strong>Check the Governance Playbook.</strong> Navigate to the Playbook — the MAP 2 Vendor Due Diligence task has auto-completed. Review any remaining MAP 2 tasks and check whether MEASURE phase tasks need attention.</div>
+      </li>
+      <li class="ns-item">
+        <div class="ns-num">4</div>
+        <div><strong>Return to the GRC Dashboard.</strong> Check your updated Program Maturity score and review any new Priority Alerts. A Flagged vendor generates an urgent alert that requires escalation to the risk committee.</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">GovernAI · Vendor Due Diligence — Performing a VDD Assessment · SR 11-7 · EU AI Act Art. 28</div>
+    <a href="index.html" class="footer-btn">← Back to GovernAI</a>
+  </div>
+
+</div>
+</body>
+</html>

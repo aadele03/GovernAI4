@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovernAI — How to Use the Governance Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --charcoal:#141413;--orange:#D97757;--orange-dk:#C15F3C;
+  --cream:#FAF9F5;--white:#fff;--gray:#7A7870;
+  --gray-line:#E8E6DC;--gray-bg:#F5F4EF;
+  --blue:#6A9BCC;--green:#788C5D;--red:#C0634A;
+}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--white);color:var(--charcoal);line-height:1.65;font-size:15px;}
+.topbar{background:var(--charcoal);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;position:sticky;top:0;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.logo-sq{width:26px;height:26px;background:var(--orange);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.logo-sq svg{width:13px;height:13px;}
+.logo-name{font-family:"DM Serif Display",serif;font-size:16px;color:var(--cream);}
+.logo-name span{color:var(--orange);}
+.topbar-right{display:flex;gap:10px;align-items:center;}
+.back-link{font-size:12px;color:rgba(250,249,245,.4);text-decoration:none;padding:5px 12px;border:1px solid rgba(255,255,255,.1);border-radius:7px;}
+.back-link:hover{color:var(--cream);}
+.print-btn{font-size:11px;font-weight:600;color:var(--cream);background:var(--orange);border:none;border-radius:7px;padding:6px 14px;cursor:pointer;font-family:"DM Sans",sans-serif;}
+.print-btn:hover{background:var(--orange-dk);}
+.page{max-width:820px;margin:0 auto;padding:56px 40px 100px;}
+.cover{margin-bottom:52px;padding-bottom:40px;border-bottom:2px solid var(--charcoal);}
+.cover-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.cover-label::before{content:"";width:16px;height:2px;background:var(--orange);display:block;}
+.cover h1{font-family:"DM Serif Display",serif;font-size:44px;line-height:1.08;color:var(--charcoal);margin-bottom:12px;}
+.cover-intro{font-size:15px;color:var(--gray);line-height:1.7;max-width:580px;margin-bottom:28px;}
+.cover-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:12px;color:var(--gray);padding:4px 12px;border-radius:20px;border:1px solid var(--gray-line);background:var(--gray-bg);}
+.toc{margin-bottom:56px;}
+.toc-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+.toc-list{list-style:none;}
+.toc-item a{display:flex;align-items:baseline;gap:10px;padding:8px 0;text-decoration:none;color:var(--charcoal);font-size:14px;border-bottom:1px solid var(--gray-line);transition:color .12s;}
+.toc-item:last-child a{border-bottom:none;}
+.toc-item a:hover{color:var(--orange);}
+.toc-n{font-family:"DM Mono",monospace;font-size:10px;color:var(--gray);width:24px;flex-shrink:0;}
+.toc-dot{flex:1;border-bottom:1px dotted var(--gray-line);margin:0 6px;align-self:flex-end;padding-bottom:3px;}
+.section{margin-bottom:60px;padding-top:8px;}
+.section-divider{height:1px;background:var(--gray-line);margin:52px 0;}
+.step-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+h2.step-title{font-family:"DM Serif Display",serif;font-size:28px;color:var(--charcoal);margin-bottom:10px;line-height:1.15;}
+.step-intro{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:28px;}
+.screen-fig{border:1px solid var(--gray-line);border-radius:10px;overflow:hidden;margin:24px 0;}
+.screen-fig svg{display:block;width:100%;}
+figcaption{font-size:11px;font-family:"DM Mono",monospace;color:var(--gray);padding:9px 16px;background:var(--gray-bg);border-top:1px solid var(--gray-line);display:flex;align-items:center;gap:6px;}
+figcaption::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.field-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13.5px;}
+.field-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);padding:8px 14px;border-bottom:2px solid var(--charcoal);background:var(--gray-bg);}
+.field-table td{padding:11px 14px;border-bottom:1px solid var(--gray-line);vertical-align:top;line-height:1.55;}
+.field-table tr:last-child td{border-bottom:none;}
+.fname{font-weight:700;}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.t-blue{background:rgba(106,155,204,.15);color:#2C5F8A;}
+.t-green{background:rgba(120,140,93,.12);color:var(--green);}
+.t-orange{background:rgba(217,119,87,.12);color:var(--orange-dk);}
+.t-gray{background:rgba(122,120,112,.1);color:var(--gray);}
+.callout{border-radius:8px;padding:14px 18px;margin:20px 0;display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;}
+.ci{font-size:16px;flex-shrink:0;margin-top:1px;}
+.callout.warn{background:rgba(192,99,74,.07);border:1px solid rgba(192,99,74,.2);}
+.callout.info{background:rgba(120,140,93,.07);border:1px solid rgba(120,140,93,.2);}
+.callout.tip{background:rgba(106,155,204,.08);border:1px solid rgba(106,155,204,.22);}
+.callout strong{font-weight:700;}
+.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+.phase-card{border-radius:8px;padding:14px 16px;border:1px solid var(--gray-line);}
+.phase-num{font-family:"DM Mono",monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
+.phase-name{font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:3px;}
+.phase-desc{font-size:11.5px;color:var(--gray);line-height:1.5;margin-bottom:6px;}
+.phase-tasks{font-size:10.5px;color:var(--gray);}
+.next-steps{list-style:none;display:flex;flex-direction:column;gap:12px;margin:20px 0;}
+.ns-item{display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.55;}
+.ns-num{width:26px;height:26px;border-radius:50%;background:var(--charcoal);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.footer{border-top:1px solid var(--gray-line);padding-top:32px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-text{font-size:12px;color:var(--gray);}
+.footer-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:var(--charcoal);color:var(--cream);border-radius:9px;text-decoration:none;font-size:13px;font-weight:600;}
+.footer-btn:hover{background:var(--orange);}
+@media print{.topbar,.print-btn{display:none;}.page{padding:0;max-width:100%;}.section{page-break-inside:avoid;}}
+@media(max-width:640px){.page{padding:28px 20px 60px;}.cover h1{font-size:32px;}.topbar{padding:0 20px;}.phase-grid{grid-template-columns:1fr;}}
+
+/* ── Workflow flow row ── */
+.workflow-row{display:flex;align-items:stretch;gap:0;margin:24px 0;}
+.wf-step{flex:1;background:var(--gray-bg);border:1px solid var(--gray-line);border-radius:8px;padding:16px 14px;text-align:center;}
+.wf-arrow{color:var(--gray-line);font-size:22px;padding:0 10px;display:flex;align-items:center;flex-shrink:0;}
+.wf-icon{font-size:22px;margin-bottom:6px;}
+.wf-label{font-size:12px;font-weight:700;color:var(--charcoal);margin-bottom:3px;}
+.wf-desc{font-size:11px;color:var(--gray);line-height:1.5;}
+/* ── Phase card background ── */
+.phase-card{border-radius:8px;padding:14px 16px;border:1px solid var(--gray-line);background:var(--gray-bg);}
+.phase-num{font-family:"DM Mono",monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
+.phase-name{font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:3px;}
+.phase-desc{font-size:11.5px;color:var(--gray);line-height:1.5;margin-bottom:6px;}
+.phase-tasks{font-size:10.5px;color:var(--gray);}
+/* ── Tags ── */
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.t-blue{background:rgba(106,155,204,.15);color:#2C5F8A;}
+.t-green{background:rgba(120,140,93,.12);color:var(--green);}
+.t-orange{background:rgba(217,119,87,.12);color:var(--orange-dk);}
+.t-gray{background:rgba(122,120,112,.1);color:var(--gray);}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="logo-sq"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7l-8-4z" fill="white" opacity=".9"/><path d="M9 12l2 2 4-4" stroke="#D97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span class="logo-name">Govern<span>AI</span></span>
+  </a>
+  <div class="topbar-right">
+    <a href="index.html" class="back-link">← Back to GovernAI</a>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">Instruction Manual · Governance Playbook</div>
+    <h1>How to Use the<br>Governance Playbook</h1>
+    <p class="cover-intro">The Governance Playbook is your AI governance programme's structured project plan. It contains 35 tasks across six NIST AI RMF-aligned phases. Completing these tasks builds a documented, auditable programme that satisfies regulatory expectations and moves your Program Maturity score.</p>
+    <div class="cover-chips">
+      <span class="chip">📋 6 phases · 35 tasks</span>
+      <span class="chip">🛡 NIST AI RMF aligned</span>
+      <span class="chip">📎 Evidence file uploads</span>
+      <span class="chip">⚡ Some tasks auto-complete</span>
+      <span class="chip">👤 Owner assignment per task</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-label">Steps</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#s1"><span class="toc-n">01</span>Open the Governance Playbook<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s2"><span class="toc-n">02</span>Understand the six phases<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s3"><span class="toc-n">03</span>Navigate between phases<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s4"><span class="toc-n">04</span>Open and read a task<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s5"><span class="toc-n">05</span>Assign an owner<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s6"><span class="toc-n">06</span>Upload evidence<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s7"><span class="toc-n">07</span>Attest a task complete<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s8"><span class="toc-n">08</span>Mark a phase complete<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s9"><span class="toc-n">09</span>Tasks that auto-complete<span class="toc-dot"></span></a></li>
+      <li class="toc-item"><a href="#s10"><span class="toc-n">10</span>All 35 tasks — reference list<span class="toc-dot"></span></a></li>
+    </ul>
+  </div>
+
+
+  <!-- ── STEP 1 ── -->
+  <div class="section" id="s1">
+    <div class="step-label">Step 01</div>
+    <h2 class="step-title">Open the Governance Playbook</h2>
+    <p class="step-intro">Click <strong>Governance Playbook</strong> in the left sidebar. The module opens with a split-panel layout — the six phases listed in the left rail and the tasks for the active phase displayed on the right.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 250" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="250" fill="#FAF9F5"/>
+        <!-- Sidebar -->
+        <rect width="196" height="250" fill="#141413"/>
+        <rect x="10" y="12" width="22" height="22" rx="6" fill="#D97757"/>
+        <text x="21" y="27" fill="white" font-size="10" font-weight="700" text-anchor="middle">G</text>
+        <text x="38" y="27" fill="#FAF9F5" font-size="12" font-family="DM Serif Display, serif">GovernAI</text>
+        <text x="12" y="54" fill="#7A7870" font-size="8" font-weight="700" letter-spacing="1.2">OVERVIEW</text>
+        <text x="28" y="70" fill="#7A7870" font-size="11">GRC Dashboard</text>
+        <text x="12" y="94" fill="#7A7870" font-size="8" font-weight="700" letter-spacing="1.2">MODULES</text>
+        <rect x="6" y="99" width="184" height="26" rx="7" fill="rgba(217,119,87,0.15)"/>
+        <text x="28" y="116" fill="#D97757" font-size="11" font-weight="600">Governance Playbook</text>
+        <text x="28" y="136" fill="#7A7870" font-size="11">AI Inventory</text>
+        <text x="28" y="156" fill="#7A7870" font-size="11">Risk Assessment</text>
+        <text x="28" y="176" fill="#7A7870" font-size="11">Vendor Due Diligence</text>
+        <text x="28" y="196" fill="#7A7870" font-size="11">Risk Management</text>
+        <!-- Main topbar -->
+        <rect x="196" y="0" width="624" height="38" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="212" y="14" fill="#7A7870" font-size="9.5">Overall completion</text>
+        <rect x="320" y="8" width="200" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="320" y="8" width="48" height="8" rx="4" fill="#D97757"/>
+        <text x="528" y="17" fill="#D97757" font-size="11" font-weight="700">14%</text>
+        <text x="212" y="30" fill="#141413" font-size="11" font-weight="600">5 of 35 tasks complete</text>
+        <!-- Phase nav left rail -->
+        <rect x="196" y="38" width="200" height="212" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Phase 1 GOVERN — active -->
+        <rect x="196" y="38" width="200" height="36" fill="rgba(106,155,204,0.12)" stroke="#E8E6DC" stroke-width="0.5"/>
+        <rect x="196" y="38" width="3" height="36" fill="#6A9BCC"/>
+        <text x="210" y="53" fill="#6A9BCC" font-size="9" font-weight="700">PHASE 1 · GOVERN</text>
+        <text x="210" y="66" fill="#141413" font-size="10.5" font-weight="600">Governance Foundations</text>
+        <rect x="340" y="46" width="44" height="14" rx="4" fill="rgba(106,155,204,0.15)"/>
+        <text x="362" y="56" fill="#6A9BCC" font-size="8.5" font-weight="700" text-anchor="middle">1 / 6</text>
+        <!-- Phase 2 MAP1 -->
+        <rect x="196" y="74" width="200" height="34" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="210" y="88" fill="#7A7870" font-size="9" font-weight="700">PHASE 2 · MAP</text>
+        <text x="210" y="101" fill="#141413" font-size="10.5">Categorize &amp; Context</text>
+        <rect x="340" y="82" width="44" height="14" rx="4" fill="rgba(217,119,87,0.12)"/>
+        <text x="362" y="92" fill="#D97757" font-size="8.5" font-weight="700" text-anchor="middle">4 / 6</text>
+        <!-- Phase 3 MAP2 -->
+        <rect x="196" y="108" width="200" height="34" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="210" y="122" fill="#7A7870" font-size="9" font-weight="700">PHASE 3 · MAP</text>
+        <text x="210" y="135" fill="#141413" font-size="10.5">Identify &amp; Analyze Risks</text>
+        <rect x="340" y="116" width="44" height="14" rx="4" fill="rgba(217,119,87,0.12)"/>
+        <text x="362" y="126" fill="#D97757" font-size="8.5" font-weight="700" text-anchor="middle">0 / 6</text>
+        <!-- Phase 4 MEASURE -->
+        <rect x="196" y="142" width="200" height="34" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="210" y="156" fill="#7A7870" font-size="9" font-weight="700">PHASE 4 · MEASURE</text>
+        <text x="210" y="169" fill="#141413" font-size="10.5">Measure &amp; Test</text>
+        <rect x="340" y="150" width="44" height="14" rx="4" fill="rgba(122,120,112,0.1)"/>
+        <text x="362" y="160" fill="#7A7870" font-size="8.5" font-weight="700" text-anchor="middle">0 / 6</text>
+        <!-- Phase 5 MANAGE1 -->
+        <rect x="196" y="176" width="200" height="34" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="210" y="190" fill="#7A7870" font-size="9" font-weight="700">PHASE 5 · MANAGE</text>
+        <text x="210" y="203" fill="#141413" font-size="10.5">Controls &amp; Treatment</text>
+        <rect x="340" y="184" width="44" height="14" rx="4" fill="rgba(122,120,112,0.1)"/>
+        <text x="362" y="194" fill="#7A7870" font-size="8.5" font-weight="700" text-anchor="middle">0 / 5</text>
+        <!-- Phase 6 MANAGE2 -->
+        <rect x="196" y="210" width="200" height="38" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="210" y="224" fill="#7A7870" font-size="9" font-weight="700">PHASE 6 · MANAGE</text>
+        <text x="210" y="237" fill="#141413" font-size="10.5">Monitor &amp; Operationalize</text>
+        <rect x="340" y="218" width="44" height="14" rx="4" fill="rgba(122,120,112,0.1)"/>
+        <text x="362" y="228" fill="#7A7870" font-size="8.5" font-weight="700" text-anchor="middle">0 / 6</text>
+        <!-- Right panel: active phase content -->
+        <rect x="396" y="38" width="424" height="212" fill="white"/>
+        <text x="412" y="58" fill="#6A9BCC" font-size="10" font-weight="700" letter-spacing=".08em">PHASE 1 OF 6 · GOVERN</text>
+        <text x="412" y="74" fill="#141413" font-size="15" font-weight="700" font-family="DM Serif Display, serif">Establish AI Governance Foundations</text>
+        <text x="412" y="90" fill="#7A7870" font-size="11">Define risk appetite, governance structures, accountability roles,</text>
+        <text x="412" y="104" fill="#7A7870" font-size="11">and the policies that will govern responsible AI use.</text>
+        <rect x="412" y="116" width="50" height="16" rx="5" fill="rgba(106,155,204,0.15)"/>
+        <text x="437" y="127" fill="#6A9BCC" font-size="9.5" font-weight="600" text-anchor="middle">In progress</text>
+        <rect x="470" y="116" width="120" height="8" rx="4" fill="#E8E6DC"/>
+        <rect x="470" y="116" width="20" height="8" rx="4" fill="#6A9BCC"/>
+        <text x="598" y="125" fill="#6A9BCC" font-size="10" font-weight="700">1 / 6 tasks</text>
+        <!-- Task rows -->
+        <rect x="412" y="136" width="394" height="24" rx="5" fill="#F5F4EF"/>
+        <rect x="412" y="136" width="16" height="16" rx="3" fill="#D97757" transform="translate(0 4)"/>
+        <path d="M414 148 l4.5 4.5 7-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="436" y="152" fill="#141413" font-size="11" font-weight="600">Define AI risk appetite and tolerance statement</text>
+        <rect x="412" y="164" width="394" height="24" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="412" y="168" width="16" height="16" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="436" y="180" fill="#141413" font-size="11">Establish an AI governance committee or body</text>
+        <rect x="412" y="192" width="394" height="24" rx="5" fill="#F5F4EF"/>
+        <rect x="412" y="196" width="16" height="16" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="436" y="208" fill="#141413" font-size="11">Assign AI governance roles and accountabilities</text>
+        <rect x="412" y="220" width="394" height="24" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="412" y="224" width="16" height="16" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="436" y="236" fill="#141413" font-size="11">Develop and publish an AI Use Policy</text>
+      </svg>
+      <figcaption>Governance Playbook — phase rail on the left, active phase tasks on the right. Orange checkbox = complete.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 2 ── -->
+  <div class="section" id="s2">
+    <div class="step-label">Step 02</div>
+    <h2 class="step-title">Understand the six phases</h2>
+    <p class="step-intro">The Playbook is structured around the four NIST AI RMF functions — GOVERN, MAP, MEASURE, and MANAGE — broken into six sequential phases with 35 tasks in total. Work through them in order: Phase 1 first, Phase 6 last.</p>
+
+    <div class="phase-grid">
+      <div class="phase-card" style="border-color:rgba(106,155,204,.4);background:rgba(106,155,204,.04);">
+        <div class="phase-num" style="color:#6A9BCC;">PHASE 1 · GOVERN</div>
+        <div class="phase-name">Establish AI Governance Foundations</div>
+        <div class="phase-desc">Define your risk appetite, governance committee, roles and accountabilities, AI Use Policy, incident response procedures, and training requirements.</div>
+        <div class="phase-tasks">6 tasks · Must be completed first</div>
+      </div>
+      <div class="phase-card" style="border-color:rgba(120,140,93,.4);background:rgba(120,140,93,.04);">
+        <div class="phase-num" style="color:#788C5D;">PHASE 2 · MAP</div>
+        <div class="phase-name">Categorize Context &amp; Use Cases</div>
+        <div class="phase-desc">Identify all AI systems, document their business context and intended purpose, identify affected populations, assess human-AI interaction, classify risk, and map supply chains.</div>
+        <div class="phase-tasks">6 tasks · Links to AI Inventory</div>
+      </div>
+      <div class="phase-card" style="border-color:rgba(217,119,87,.4);background:rgba(217,119,87,.04);">
+        <div class="phase-num" style="color:#C15F3C;">PHASE 3 · MAP</div>
+        <div class="phase-name">Identify &amp; Analyze AI Risks</div>
+        <div class="phase-desc">Complete structured risk assessments, evaluate bias and fairness, assess explainability, conduct vendor due diligence, document findings, and validate with the governance committee.</div>
+        <div class="phase-tasks">6 tasks · Links to Risk Assessment &amp; VDD</div>
+      </div>
+      <div class="phase-card" style="border-color:rgba(155,125,191,.4);background:rgba(155,125,191,.04);">
+        <div class="phase-num" style="color:#9B7DBF;">PHASE 4 · MEASURE</div>
+        <div class="phase-name">Measure, Test &amp; Analyze Performance</div>
+        <div class="phase-desc">Define performance and fairness metrics, conduct bias testing, test reliability and failure modes, establish monitoring thresholds, and document measurement methodology.</div>
+        <div class="phase-tasks">6 tasks · Metrics and testing</div>
+      </div>
+      <div class="phase-card" style="border-color:rgba(192,99,74,.4);background:rgba(192,99,74,.04);">
+        <div class="phase-num" style="color:#C0634A;">PHASE 5 · MANAGE</div>
+        <div class="phase-name">Assign Controls &amp; Treat Risks</div>
+        <div class="phase-desc">Select treatment pathways for all Critical and High findings, define and assign controls, assess control effectiveness, establish a vendor remediation programme, and document formal risk acceptances.</div>
+        <div class="phase-tasks">5 tasks · Links to Risk Management</div>
+      </div>
+      <div class="phase-card" style="border-color:rgba(122,120,112,.4);background:rgba(122,120,112,.04);">
+        <div class="phase-num" style="color:#7A7870;">PHASE 6 · MANAGE</div>
+        <div class="phase-name">Monitor, Review &amp; Operationalize</div>
+        <div class="phase-desc">Establish review cadences, integrate AI risk into enterprise reporting, implement continuous monitoring, conduct programme reviews, prepare examination documentation, and publish governance status reports.</div>
+        <div class="phase-tasks">6 tasks · Ongoing operations</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="ci">ℹ️</div>
+      <div><strong>Complete phases in order.</strong> Each phase builds on the previous one. GOVERN must be complete before MAP tasks are meaningful. MAP must be done before MEASURE is actionable. You can navigate to any phase at any time but completing them in sequence produces the strongest governance programme.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 3 ── -->
+  <div class="section" id="s3">
+    <div class="step-label">Step 03</div>
+    <h2 class="step-title">Navigate between phases</h2>
+    <p class="step-intro">Click any phase in the left rail to load its tasks in the right panel. The rail shows the phase name, NIST function label, and a live task completion count. The active phase is highlighted with a coloured left border.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker></defs>
+        <rect width="820" height="180" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Phase rail detail -->
+        <!-- Phase 1 active -->
+        <rect x="0" y="0" width="240" height="36" fill="rgba(106,155,204,0.1)" stroke="#E8E6DC" stroke-width="0.5"/>
+        <rect x="0" y="0" width="3" height="36" fill="#6A9BCC"/>
+        <text x="14" y="14" fill="#6A9BCC" font-size="8.5" font-weight="700">PHASE 1 · GOVERN</text>
+        <text x="14" y="28" fill="#141413" font-size="11" font-weight="600">Governance Foundations</text>
+        <rect x="180" y="8" width="48" height="16" rx="5" fill="rgba(120,140,93,0.15)"/>
+        <text x="204" y="19" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">✓ 6 / 6</text>
+        <!-- Phase 2 -->
+        <rect x="0" y="36" width="240" height="36" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="14" y="50" fill="#7A7870" font-size="8.5" font-weight="700">PHASE 2 · MAP</text>
+        <text x="14" y="64" fill="#141413" font-size="11">Categorize &amp; Context</text>
+        <rect x="180" y="44" width="44" height="16" rx="5" fill="rgba(217,119,87,0.12)"/>
+        <text x="202" y="55" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">4 / 6</text>
+        <!-- Phase 3 - highlighted as active -->
+        <rect x="0" y="72" width="240" height="36" fill="rgba(217,119,87,0.08)" stroke="#D97757" stroke-width="1"/>
+        <rect x="0" y="72" width="3" height="36" fill="#D97757"/>
+        <text x="14" y="86" fill="#D97757" font-size="8.5" font-weight="700">PHASE 3 · MAP</text>
+        <text x="14" y="100" fill="#141413" font-size="11" font-weight="600">Identify &amp; Analyze Risks</text>
+        <rect x="180" y="80" width="44" height="16" rx="5" fill="rgba(122,120,112,0.1)"/>
+        <text x="202" y="91" fill="#7A7870" font-size="9" font-weight="700" text-anchor="middle">0 / 6</text>
+        <!-- Phase 4 -->
+        <rect x="0" y="108" width="240" height="36" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="14" y="122" fill="#7A7870" font-size="8.5" font-weight="700">PHASE 4 · MEASURE</text>
+        <text x="14" y="136" fill="#141413" font-size="11">Measure &amp; Test</text>
+        <rect x="180" y="116" width="44" height="16" rx="5" fill="rgba(122,120,112,0.1)"/>
+        <text x="202" y="127" fill="#7A7870" font-size="9" font-weight="700" text-anchor="middle">0 / 6</text>
+        <!-- Phase 5 -->
+        <rect x="0" y="144" width="240" height="36" fill="white" stroke="#E8E6DC" stroke-width="0.5"/>
+        <text x="14" y="158" fill="#7A7870" font-size="8.5" font-weight="700">PHASE 5 · MANAGE</text>
+        <text x="14" y="172" fill="#141413" font-size="11">Controls &amp; Treatment</text>
+        <rect x="180" y="152" width="44" height="16" rx="5" fill="rgba(122,120,112,0.1)"/>
+        <text x="202" y="163" fill="#7A7870" font-size="9" font-weight="700" text-anchor="middle">0 / 5</text>
+        <!-- Annotations -->
+        <path d="M244 90 L280 90" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a1)"/>
+        <rect x="282" y="75" width="200" height="32" rx="5" fill="#D97757"/>
+        <text x="382" y="88" fill="white" font-size="11" font-weight="700" text-anchor="middle">Orange border = active phase</text>
+        <text x="382" y="102" fill="white" font-size="10.5" text-anchor="middle">Click any phase to switch</text>
+        <!-- Status legend -->
+        <rect x="500" y="30" width="310" height="120" rx="6" fill="#FAF9F5" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="516" y="50" fill="#141413" font-size="11" font-weight="700">Phase status indicators</text>
+        <rect x="516" y="60" width="48" height="14" rx="4" fill="rgba(120,140,93,0.15)"/>
+        <text x="540" y="70" fill="#788C5D" font-size="9" font-weight="700" text-anchor="middle">✓ 6 / 6</text>
+        <text x="572" y="70" fill="#7A7870" font-size="11">All tasks complete</text>
+        <rect x="516" y="80" width="44" height="14" rx="4" fill="rgba(217,119,87,0.12)"/>
+        <text x="538" y="90" fill="#D97757" font-size="9" font-weight="700" text-anchor="middle">4 / 6</text>
+        <text x="568" y="90" fill="#7A7870" font-size="11">In progress</text>
+        <rect x="516" y="100" width="44" height="14" rx="4" fill="rgba(122,120,112,0.1)"/>
+        <text x="538" y="110" fill="#7A7870" font-size="9" font-weight="700" text-anchor="middle">0 / 6</text>
+        <text x="568" y="110" fill="#7A7870" font-size="11">Not started</text>
+        <text x="516" y="132" fill="#7A7870" font-size="10.5">Overall % shown in topbar progress bar</text>
+      </svg>
+      <figcaption>Phase rail — click any phase to switch. Task count and completion status shown for each.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 4 ── -->
+  <div class="section" id="s4">
+    <div class="step-label">Step 04</div>
+    <h2 class="step-title">Open and read a task</h2>
+    <p class="step-intro">Click any task row to expand it. The expanded view shows the full task description, regulatory tags, required evidence items, an owner dropdown, a file upload zone, and the Attest button.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 310" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker></defs>
+        <rect width="820" height="310" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Collapsed tasks above -->
+        <rect x="0" y="0" width="820" height="28" rx="5" fill="#F5F4EF"/>
+        <rect x="4" y="8" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M5.5 15 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="24" y="18" fill="#7A7870" font-size="11">Define AI risk appetite and tolerance statement</text>
+        <text x="720" y="18" fill="#788C5D" font-size="10" font-weight="700">✓ Attested</text>
+        <!-- EXPANDED TASK -->
+        <rect x="0" y="28" width="820" height="254" rx="5" fill="white" stroke="#D97757" stroke-width="1.5"/>
+        <rect x="0" y="28" width="820" height="34" rx="5" fill="rgba(217,119,87,0.06)"/>
+        <rect x="0" y="46" width="820" height="16" fill="rgba(217,119,87,0.06)"/>
+        <rect x="4" y="36" width="14" height="14" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="24" y="49" fill="#141413" font-size="12" font-weight="700">Establish an AI governance committee or body</text>
+        <!-- Regulatory tags -->
+        <rect x="24" y="56" width="70" height="14" rx="4" fill="rgba(106,155,204,0.15)"/>
+        <text x="59" y="66" fill="#2C5F8A" font-size="9" font-weight="700" text-anchor="middle">NIST AI RMF</text>
+        <!-- Task description -->
+        <line x1="0" y1="78" x2="820" y2="78" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="20" y="96" fill="#141413" font-size="12" font-weight="600">What to do</text>
+        <text x="20" y="112" fill="#7A7870" font-size="11.5">Designate a cross-functional AI governance body with clear terms of reference.</text>
+        <text x="20" y="128" fill="#7A7870" font-size="11.5">Include representation from risk, legal, compliance, technology, and relevant</text>
+        <text x="20" y="144" fill="#7A7870" font-size="11.5">business lines. Document membership, meeting cadence, and decision rights.</text>
+        <!-- Evidence required -->
+        <line x1="0" y1="160" x2="820" y2="160" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="20" y="178" fill="#141413" font-size="12" font-weight="600">Required evidence</text>
+        <rect x="20" y="186" width="250" height="20" rx="5" fill="rgba(106,155,204,0.1)" stroke="rgba(106,155,204,0.3)" stroke-width="1"/>
+        <text x="30" y="199" fill="#2C5F8A" font-size="11">AI Governance Committee Charter</text>
+        <!-- Owner -->
+        <line x1="0" y1="216" x2="820" y2="216" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="20" y="234" fill="#141413" font-size="12" font-weight="600">Owner</text>
+        <rect x="20" y="240" width="240" height="26" rx="6" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="32" y="257" fill="#141413" font-size="12">Chief Risk Officer</text>
+        <text x="244" y="257" fill="#7A7870" font-size="13">⌄</text>
+        <!-- Attach + Attest buttons -->
+        <rect x="20" y="275" width="100" height="24" rx="6" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="70" y="291" fill="#7A7870" font-size="11" text-anchor="middle">📎 Attach file</text>
+        <rect x="686" y="275" width="114" height="24" rx="6" fill="#D97757"/>
+        <text x="743" y="291" fill="white" font-size="12" font-weight="700" text-anchor="middle">Attest complete</text>
+        <!-- Annotations -->
+        <path d="M280 199 L330 199" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a2)"/>
+        <rect x="332" y="187" width="200" height="24" rx="5" fill="#D97757"/>
+        <text x="432" y="202" fill="white" font-size="10.5" font-weight="700" text-anchor="middle">Upload this document to satisfy</text>
+      </svg>
+      <figcaption>Expanded task — description, required evidence badge, owner dropdown, Attach file, and Attest complete button</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 5 ── -->
+  <div class="section" id="s5">
+    <div class="step-label">Step 05</div>
+    <h2 class="step-title">Assign an owner</h2>
+    <p class="step-intro">Every task should have a named owner — the individual accountable for completing it. Click the <strong>Owner</strong> dropdown inside the expanded task and select a person. Changes save automatically.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 130" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D97757"/></marker></defs>
+        <rect width="820" height="130" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="20" y="22" fill="#141413" font-size="11" font-weight="700">Owner</text>
+        <!-- Dropdown closed -->
+        <rect x="20" y="28" width="340" height="30" rx="7" fill="#F5F4EF" stroke="#D97757" stroke-width="1.5"/>
+        <text x="32" y="47" fill="#141413" font-size="12">Chief Compliance Officer</text>
+        <text x="342" y="47" fill="#7A7870" font-size="14">⌄</text>
+        <!-- Annotation -->
+        <path d="M364 43 L410 43" stroke="#D97757" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a3)"/>
+        <rect x="412" y="29" width="250" height="28" rx="5" fill="#D97757"/>
+        <text x="537" y="41" fill="white" font-size="10.5" font-weight="700" text-anchor="middle">A specific person — not a team.</text>
+        <text x="537" y="53" fill="white" font-size="10.5" text-anchor="middle">Update if they change roles.</text>
+        <!-- Available owners list preview -->
+        <text x="20" y="84" fill="#7A7870" font-size="11">Available owners: Chief Risk Officer · CISO · Chief Privacy Officer · Chief Medical Officer ·</text>
+        <text x="20" y="100" fill="#7A7870" font-size="11">Chief Compliance Officer · Chief HR Officer · General Counsel · Head of Compliance ·</text>
+        <text x="20" y="116" fill="#7A7870" font-size="11">Head of Credit Risk · Head of Fraud · VP Engineering</text>
+      </svg>
+      <figcaption>Owner dropdown — select a named individual accountable for completing this task</figcaption>
+    </figure>
+
+    <div class="callout warn">
+      <div class="ci">⚠️</div>
+      <div><strong>Assign every task to a specific person before attesting.</strong> Unowned tasks are an accountability gap. Regulators and examiners expect named individuals responsible for each governance obligation. If the owner changes roles or leaves, update the assignment immediately.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 6 ── -->
+  <div class="section" id="s6">
+    <div class="step-label">Step 06</div>
+    <h2 class="step-title">Upload evidence</h2>
+    <p class="step-intro">Some tasks require an evidence file upload before they can be marked complete. The required evidence item is shown as a blue badge inside the task. Click <strong>Attach file</strong> and upload the relevant document.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#6A9BCC"/></marker></defs>
+        <rect width="820" height="200" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Required evidence section -->
+        <text x="20" y="24" fill="#141413" font-size="11" font-weight="700">Required evidence</text>
+        <!-- Unsatisfied evidence badge -->
+        <rect x="20" y="32" width="220" height="22" rx="5" fill="rgba(106,155,204,0.1)" stroke="rgba(106,155,204,0.3)" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="30" y="46" fill="#6A9BCC" font-size="11">AI Governance Committee Charter</text>
+        <!-- After upload — satisfied badge -->
+        <rect x="260" y="32" width="240" height="22" rx="5" fill="rgba(120,140,93,0.12)" stroke="rgba(120,140,93,0.3)" stroke-width="1"/>
+        <text x="270" y="46" fill="#788C5D" font-size="11" font-weight="600">✓ AI Governance Committee Charter</text>
+        <!-- Arrow between -->
+        <path d="M242 43 L256 43" stroke="#7A7870" stroke-width="1.5" marker-end="url(#a4)"/>
+        <text x="244" y="38" fill="#7A7870" font-size="9.5">after upload</text>
+        <!-- Attach file area -->
+        <text x="20" y="76" fill="#141413" font-size="11" font-weight="700">Attached files</text>
+        <!-- File row — uploaded -->
+        <rect x="20" y="84" width="760" height="36" rx="6" fill="#F5F4EF" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="30" y="92" width="24" height="20" rx="3" fill="rgba(192,99,74,0.15)"/>
+        <text x="42" y="106" fill="#C0634A" font-size="9" font-weight="700" text-anchor="middle">PDF</text>
+        <text x="62" y="100" fill="#141413" font-size="12" font-weight="600">AI_Governance_Committee_Charter_2026.pdf</text>
+        <text x="62" y="114" fill="#7A7870" font-size="10">Uploaded 10 May 2026 · 1.2 MB</text>
+        <text x="740" y="106" fill="#C0634A" font-size="11" text-anchor="middle">Remove</text>
+        <!-- Attach button -->
+        <rect x="20" y="130" width="130" height="28" rx="7" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="85" y="148" fill="#7A7870" font-size="11.5" text-anchor="middle">📎 Attach file</text>
+        <!-- Accepted formats -->
+        <text x="164" y="148" fill="#B0AEA5" font-size="10.5">Accepts: PDF, DOCX, XLSX, PPTX, PNG, JPG, TXT</text>
+        <!-- Annotation -->
+        <rect x="20" y="170" width="780" height="24" rx="5" fill="rgba(120,140,93,0.07)" stroke="rgba(120,140,93,0.2)" stroke-width="1"/>
+        <text x="30" y="185" fill="#788C5D" font-size="11">💡  Name your files clearly before uploading — e.g. "AI_Risk_Appetite_Statement_2026.pdf" not "document1.pdf"</text>
+      </svg>
+      <figcaption>Evidence upload — dashed blue badge (unsatisfied) turns solid green (✓ satisfied) once the correct file is attached</figcaption>
+    </figure>
+
+    <table class="field-table">
+      <thead><tr><th>Evidence item</th><th>Required for task</th><th>What to upload</th></tr></thead>
+      <tbody>
+        <tr><td><span class="fname">AI Risk Appetite Statement</span></td><td>g1 — Define AI risk appetite</td><td>Signed board or executive-approved document stating acceptable AI risk categories and thresholds</td></tr>
+        <tr><td><span class="fname">AI Governance Committee Charter</span></td><td>g2 — Establish governance committee</td><td>Formal charter listing committee membership, terms of reference, meeting cadence, and decision rights</td></tr>
+        <tr><td><span class="fname">AI Use Policy</span></td><td>g4 — Develop AI Use Policy</td><td>Published policy governing AI procurement, deployment, monitoring, and prohibited use cases</td></tr>
+        <tr><td><span class="fname">AI Inventory register</span></td><td>m1a — Identify all AI systems</td><td>Completed inventory — auto-satisfied when AI Inventory module has registered systems</td></tr>
+        <tr><td><span class="fname">Risk classification records</span></td><td>m1e — Classify AI systems</td><td>Documentation of risk tier assignments — auto-satisfied when Risk Assessment records exist</td></tr>
+        <tr><td><span class="fname">Completed risk assessments</span></td><td>m2a — Complete risk assessments</td><td>Auto-satisfied when Risk Assessment wizard is completed for systems in the Inventory</td></tr>
+        <tr><td><span class="fname">Performance benchmarks</span></td><td>ms1 — Define performance metrics</td><td>Documented baseline metrics, accuracy targets, and monitoring thresholds per system</td></tr>
+        <tr><td><span class="fname">Risk treatment records</span></td><td>mg1a — Select treatment pathways</td><td>Auto-satisfied when treatment pathways are assigned in Risk Management</td></tr>
+        <tr><td><span class="fname">Control owner assignments</span></td><td>mg1b — Define and assign controls</td><td>Auto-satisfied when findings have named owners in Risk Management</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 7 ── -->
+  <div class="section" id="s7">
+    <div class="step-label">Step 07</div>
+    <h2 class="step-title">Attest a task complete</h2>
+    <p class="step-intro">When a task has been completed — the work is done, the owner is assigned, and any required evidence is uploaded — click <strong>Attest complete</strong>. The task checkbox turns orange and the phase completion count increments.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <defs><marker id="a5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#788C5D"/></marker></defs>
+        <rect width="820" height="160" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- Before attest -->
+        <rect x="20" y="20" width="340" height="60" rx="8" fill="#FAF9F5" stroke="#E8E6DC" stroke-width="1"/>
+        <text x="36" y="40" fill="#7A7870" font-size="11" font-weight="600">Before attestation</text>
+        <rect x="36" y="50" width="14" height="14" rx="3" fill="white" stroke="#D0CEC8" stroke-width="1.5"/>
+        <text x="56" y="63" fill="#141413" font-size="11">Establish governance committee</text>
+        <rect x="210" y="72" width="130" height="24" rx="6" fill="#D97757"/>
+        <text x="275" y="88" fill="white" font-size="12" font-weight="700" text-anchor="middle">Attest complete</text>
+        <!-- Arrow -->
+        <path d="M364 74 L440 74" stroke="#788C5D" stroke-width="2" marker-end="url(#a5)"/>
+        <text x="388" y="66" fill="#788C5D" font-size="10">click</text>
+        <!-- After attest -->
+        <rect x="444" y="20" width="340" height="60" rx="8" fill="rgba(120,140,93,0.06)" stroke="rgba(120,140,93,0.3)" stroke-width="1"/>
+        <text x="460" y="40" fill="#788C5D" font-size="11" font-weight="600">After attestation</text>
+        <rect x="460" y="50" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M461.5 57 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="480" y="63" fill="#141413" font-size="11" font-weight="600">Establish governance committee</text>
+        <text x="460" y="80" fill="#788C5D" font-size="10">✓ Attested 10 May 2026</text>
+        <!-- What happens on attest -->
+        <rect x="20" y="100" width="780" height="48" rx="6" fill="rgba(217,119,87,0.06)" stroke="rgba(217,119,87,0.2)" stroke-width="1"/>
+        <text x="36" y="118" fill="#141413" font-size="11" font-weight="700">What happens when you attest:</text>
+        <text x="36" y="134" fill="#7A7870" font-size="11">· Task checkbox turns orange  · Phase count increments  · Linked evidence item marked satisfied</text>
+        <text x="36" y="146" fill="#7A7870" font-size="11">· GRC Dashboard maturity score updates  · Action logged in audit trail</text>
+      </svg>
+      <figcaption>Attestation — checkbox turns orange, count increments, Dashboard maturity updates, audit trail entry created</figcaption>
+    </figure>
+
+    <div class="callout warn">
+      <div class="ci">⚠️</div>
+      <div><strong>Attest only when the work is genuinely done.</strong> Attestation is a formal governance declaration. Attesting a task before the underlying work is complete — uploading a blank template as evidence, or attesting without an owner — creates a false governance record that regulators can challenge.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 8 ── -->
+  <div class="section" id="s8">
+    <div class="step-label">Step 08</div>
+    <h2 class="step-title">Mark a phase complete</h2>
+    <p class="step-intro">Once all tasks in a phase are attested and all required evidence is uploaded, a <strong>Mark Phase complete</strong> button appears at the bottom of the task list. Click it to formally close the phase and unlock the completion banner.</p>
+
+    <figure class="screen-fig">
+      <svg viewBox="0 0 820 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+        <rect width="820" height="180" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <!-- All tasks checked -->
+        <rect x="20" y="14" width="780" height="24" rx="5" fill="#F5F4EF"/>
+        <rect x="20" y="18" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M21.5 25 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="40" y="30" fill="#7A7870" font-size="11">Define AI risk appetite and tolerance statement</text>
+        <text x="700" y="30" fill="#788C5D" font-size="10">✓ Attested</text>
+        <rect x="20" y="42" width="780" height="24" rx="5" fill="white" stroke="#E8E6DC" stroke-width="1"/>
+        <rect x="20" y="46" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M21.5 53 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="40" y="58" fill="#7A7870" font-size="11">Establish an AI governance committee or body</text>
+        <text x="700" y="58" fill="#788C5D" font-size="10">✓ Attested</text>
+        <rect x="20" y="70" width="780" height="24" rx="5" fill="#F5F4EF"/>
+        <rect x="20" y="74" width="14" height="14" rx="3" fill="#D97757" stroke="#D97757"/>
+        <path d="M21.5 81 l4 4 6-7" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="40" y="86" fill="#7A7870" font-size="11">Assign AI governance roles and accountabilities</text>
+        <text x="700" y="86" fill="#788C5D" font-size="10">✓ Attested</text>
+        <text x="20" y="116" fill="#B0AEA5" font-size="10.5">+ 3 more tasks all attested…</text>
+        <!-- Mark complete button — ready state -->
+        <rect x="20" y="130" width="780" height="38" rx="8" fill="rgba(120,140,93,0.1)" stroke="#788C5D" stroke-width="1.5"/>
+        <text x="380" y="145" fill="#788C5D" font-size="13" font-weight="700" text-anchor="middle">✓ Mark Phase 1 complete</text>
+        <text x="380" y="161" fill="#788C5D" font-size="11" text-anchor="middle">All 6 tasks attested · All required evidence uploaded</text>
+      </svg>
+      <figcaption>Mark Phase complete button — only active when all tasks are attested and all required evidence is uploaded</figcaption>
+    </figure>
+
+    <div class="callout info">
+      <div class="ci">ℹ️</div>
+      <div><strong>After marking a phase complete</strong>, a completion banner appears with a button to continue to the next phase. You can navigate freely between phases at any time — completing a phase does not lock you out of it. You can still update owners and add evidence after completion.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 9 ── -->
+  <div class="section" id="s9">
+    <div class="step-label">Step 09</div>
+    <h2 class="step-title">Tasks that auto-complete</h2>
+    <p class="step-intro">Five Playbook tasks are auto-completed when you take actions in other GovernAI modules. You do not need to attest these manually — they check themselves when the corresponding work is done.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Task</th><th>Phase</th><th>Auto-completes when…</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="fname">m2a — Complete structured risk assessments</span></td>
+          <td><span class="tag t-orange">MAP 2</span></td>
+          <td>You save a completed Risk Assessment for any High or Medium risk system in the Risk Assessment Engine</td>
+        </tr>
+        <tr>
+          <td><span class="fname">m2d — Review AI vendor risk</span></td>
+          <td><span class="tag t-orange">MAP 2</span></td>
+          <td>You save a completed Vendor Due Diligence assessment in the VDD module</td>
+        </tr>
+        <tr>
+          <td><span class="fname">ms1 — Define performance metrics</span></td>
+          <td><span class="tag t-blue">MEASURE</span></td>
+          <td>You save a completed Risk Assessment (the dimension scores establish baseline performance metrics)</td>
+        </tr>
+        <tr>
+          <td><span class="fname">mg1a — Select treatment pathways</span></td>
+          <td><span class="tag t-green">MANAGE 1</span></td>
+          <td>You assign a treatment pathway (Mitigate, Accept, Transfer, or Avoid) to a finding in Risk Management</td>
+        </tr>
+        <tr>
+          <td><span class="fname">mg1b — Define and assign controls</span></td>
+          <td><span class="tag t-green">MANAGE 1</span></td>
+          <td>You assign a named owner to a finding in Risk Management</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <div class="ci">💡</div>
+      <div><strong>Check the Playbook after completing other modules.</strong> After running a Risk Assessment, saving a VDD, or triaging findings, navigate to the Playbook to see which tasks have auto-completed. These updates move your overall completion percentage and Program Maturity score automatically.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ── STEP 10 ── -->
+  <div class="section" id="s10">
+    <div class="step-label">Step 10</div>
+    <h2 class="step-title">All 35 tasks — reference list</h2>
+    <p class="step-intro">A complete list of every task in the Playbook, grouped by phase. Use this as a checklist when planning your governance programme or preparing for regulatory examination.</p>
+
+    <table class="field-table">
+      <thead><tr><th>ID</th><th>Task</th><th>Phase</th></tr></thead>
+      <tbody>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">g1</td><td>Define AI risk appetite and tolerance statement</td><td><span class="tag t-blue">GOVERN</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">g2</td><td>Establish an AI governance committee or body</td><td><span class="tag t-blue">GOVERN</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">g3</td><td>Assign AI governance roles and accountabilities</td><td><span class="tag t-blue">GOVERN</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">g4</td><td>Develop and publish an AI Use Policy</td><td><span class="tag t-blue">GOVERN</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">g5</td><td>Establish AI incident response and escalation procedures</td><td><span class="tag t-blue">GOVERN</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">g6</td><td>Define AI training and awareness requirements</td><td><span class="tag t-blue">GOVERN</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m1a</td><td>Identify all AI systems in use or under evaluation</td><td><span class="tag t-green">MAP 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m1b</td><td>Document intended purpose and business context for each system</td><td><span class="tag t-green">MAP 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m1c</td><td>Identify affected populations and potential harms</td><td><span class="tag t-green">MAP 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m1d</td><td>Assess human-AI interaction and oversight level</td><td><span class="tag t-green">MAP 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m1e</td><td>Classify AI systems by risk category</td><td><span class="tag t-green">MAP 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m1f</td><td>Document AI supply chain and third-party dependencies</td><td><span class="tag t-green">MAP 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m2a</td><td>Complete structured risk assessments for all High and Medium-risk systems ⚡</td><td><span class="tag t-orange">MAP 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m2b</td><td>Evaluate bias and fairness risks</td><td><span class="tag t-orange">MAP 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m2c</td><td>Assess AI system explainability and transparency</td><td><span class="tag t-orange">MAP 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m2d</td><td>Review AI vendor risk and third-party dependencies ⚡</td><td><span class="tag t-orange">MAP 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m2e</td><td>Document all risk findings in the treatment register</td><td><span class="tag t-orange">MAP 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">m2f</td><td>Validate risk assessment outputs with governance committee</td><td><span class="tag t-orange">MAP 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">ms1</td><td>Define performance metrics for each AI system ⚡</td><td><span class="tag" style="background:rgba(155,125,191,.12);color:#6B4FA0;">MEASURE</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">ms2</td><td>Define fairness metrics and acceptable thresholds</td><td><span class="tag" style="background:rgba(155,125,191,.12);color:#6B4FA0;">MEASURE</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">ms3</td><td>Conduct or obtain bias testing results</td><td><span class="tag" style="background:rgba(155,125,191,.12);color:#6B4FA0;">MEASURE</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">ms4</td><td>Test AI system reliability and failure modes</td><td><span class="tag" style="background:rgba(155,125,191,.12);color:#6B4FA0;">MEASURE</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">ms5</td><td>Establish monitoring thresholds and alert triggers</td><td><span class="tag" style="background:rgba(155,125,191,.12);color:#6B4FA0;">MEASURE</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">ms6</td><td>Document measurement methodology and tooling</td><td><span class="tag" style="background:rgba(155,125,191,.12);color:#6B4FA0;">MEASURE</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg1a</td><td>Select treatment pathways for all Critical and High findings ⚡</td><td><span class="tag" style="background:rgba(192,99,74,.1);color:#A04030;">MANAGE 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg1b</td><td>Define and assign controls for each finding ⚡</td><td><span class="tag" style="background:rgba(192,99,74,.1);color:#A04030;">MANAGE 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg1c</td><td>Assess control effectiveness for existing controls</td><td><span class="tag" style="background:rgba(192,99,74,.1);color:#A04030;">MANAGE 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg1d</td><td>Establish a vendor remediation programme for VDD gaps</td><td><span class="tag" style="background:rgba(192,99,74,.1);color:#A04030;">MANAGE 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg1e</td><td>Document formal risk acceptance for residual risks</td><td><span class="tag" style="background:rgba(192,99,74,.1);color:#A04030;">MANAGE 1</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg2a</td><td>Establish AI system review and re-assessment cadences</td><td><span class="tag t-gray">MANAGE 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg2b</td><td>Integrate AI risk reporting into enterprise risk framework</td><td><span class="tag t-gray">MANAGE 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg2c</td><td>Establish continuous monitoring for production AI systems</td><td><span class="tag t-gray">MANAGE 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg2d</td><td>Conduct AI governance programme review</td><td><span class="tag t-gray">MANAGE 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg2e</td><td>Prepare AI governance documentation for regulatory examination</td><td><span class="tag t-gray">MANAGE 2</span></td></tr>
+        <tr><td class="fname" style="font-family:'DM Mono',monospace;font-size:11px;">mg2f</td><td>Publish AI governance programme status report</td><td><span class="tag t-gray">MANAGE 2</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--gray);margin-top:8px;">⚡ = auto-completes when corresponding action is taken in another module</p>
+
+    <div class="callout info" style="margin-top:24px;">
+      <div class="ci">📊</div>
+      <div><strong>Playbook completion contributes 20% of your Program Maturity score.</strong> The other three components are: AI Systems Assessed (30%), Critical Findings Resolved (30%), and Vendor Coverage (20%). Completing all 35 tasks is a significant maturity driver — but the other modules must also be active for a high overall score.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">GovernAI · Governance Playbook — 35 tasks across 6 NIST AI RMF phases</div>
+    <a href="index.html" class="footer-btn">← Back to GovernAI</a>
+  </div>
+
+</div>
+</body>
+</html>
